@@ -1,11 +1,23 @@
-import React from 'react'
+import { Card, CardHeader, Center, Flex } from '@chakra-ui/react';
+import React from 'react';
+
 
 
 export const Header = () => {
   return (
    
   <>
-    <h1>header</h1>
+    <Card pos='static'> 
+     <CardHeader h='5rem'>
+      <Flex gap='1' justify='space-evenly'  >
+        <p>logo</p>
+        <p> hora</p>
+        <p>usuario</p>
+
+      </Flex>
+     </CardHeader>
+    </Card>
+    
   </>
     
   )
