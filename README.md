@@ -26,7 +26,7 @@ npm run dev
 a.- npm install React-router@6 React-router-dom@6
 b.- npm install axios
 c.- npm install react-icons
-
+d.- npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
 
 una vez realizado los pasos mencionar y ejecutado el proyecto obtendras el siguiente resultado
 ![alt text](image-3.png)
