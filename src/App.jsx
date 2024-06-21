@@ -1,16 +1,14 @@
-import Home from "./pages/Home"
-import About from "./pages/About"
-
+import React from "react";
+import Root from "./router/Root";
 
 function App() {
   
 
   return (
-    <>
-      
+    <>  
+    
       <h1> ejemplo</h1>
-      <Home/>
-      <About/>
+      <Root></Root>
     </>
   )
 }
