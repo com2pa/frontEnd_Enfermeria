@@ -24,7 +24,7 @@ export const Root = () => {
             <Route path='/sesion' element={<Index/>}/>
             
         </Routes>
-    
+        <Footer/>
     </BrowserRouter>
    
    
