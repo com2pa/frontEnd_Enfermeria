@@ -9,7 +9,7 @@ import Footer from '../layout/Footer';
 import Menu from '../layout/Menu';
 import Index from '../pages/Login/Index';
 import RegisterFrom from '../pages/Login/RegisterForm';
-
+import LoginForm from '../pages/Login/LoginForm'
 export const Root = () => {
   return (
   
@@ -24,6 +24,7 @@ export const Root = () => {
             <Route path='/Contact' element={<Contact/>}/>
             <Route path='/sesion' element={<Index/>}/>
             <Route path='/Register' element={<RegisterFrom/>}/>
+            <Route path='/Login' element={<LoginForm/>}/>
             
         </Routes>
         <Footer/>

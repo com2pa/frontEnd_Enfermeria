@@ -8,8 +8,11 @@ const FormContainer = ({children}) => {
     bgColor={useColorModeValue('gray.100', 'gray.700')}
     p="1rem"
     rounded="lg"
-    w={{ base: '100%', md: '50%' }}
+    // w={{ base: '100%', }}
     m="10%"
+    align="center"
+    justify="center"
+  
   >
     {children}
   </Flex>
