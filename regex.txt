@@ -1,0 +1,26 @@
+###### regex de contraseña ###############
+Contiene al menos una letra mayúscula ([A-Z]).
+Contiene al menos una letra minúscula ([a-z]).
+Contiene al menos un dígito (\d).
+No tiene espacios en blanco.
+Contiene al menos un carácter especial que no sea letra ni dígito ([^A-Za-z\d\s]).
+Tiene una longitud total entre 8 y 15 caracteres.
+################################################################
+################################################################
+
+
+
+########## regex de telefono ###############
+debe comenzar con 0
+seguido 212  o 412 o 414 8 416 424 o 416 o 426
+################################################################
+################################################################
+
+
+########## regex de nombre y apellido ###############
+debe comenzar con mayuscula tanto el nombre como apellido
+primer caracter en Mayuscula del nombre seguido el resto del nombre en minuscula
+primer caracter en Mayuscula de apellido seguido el resto del nombre en minuscula
+Merwil Vegas
+################################################################
+################################################################
