@@ -8,7 +8,8 @@ import Header from '../layout/Header';
 import Footer from '../layout/Footer';
 import Menu from '../layout/Menu';
 import Index from '../pages/Login/Index';
-// import Menu from '../layout/Menu';
+import RegisterFrom from '../pages/Login/RegisterForm';
+
 export const Root = () => {
   return (
   
@@ -22,6 +23,7 @@ export const Root = () => {
             <Route path='/Services' element={<Services />}/>
             <Route path='/Contact' element={<Contact/>}/>
             <Route path='/sesion' element={<Index/>}/>
+            <Route path='/Register' element={<RegisterFrom/>}/>
             
         </Routes>
         <Footer/>
