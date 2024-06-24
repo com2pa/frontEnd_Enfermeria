@@ -87,11 +87,11 @@ export const RegisterForm = ({handleShow}) => {
    
     <FormContainer>
       <Heading>Register</Heading>
-      <FormControl w="100%">
+      <FormControl isRequired>
         
-          <Flex marginBottom="1rem">
-            <FormLabel>Nombre</FormLabel>
-            <input onChange={handleNameInput} type="text" placeholder="Nombre Apellido" value={name}  />
+          <Flex  flexDir="column" marginBottom="1rem" >
+            <FormLabel  >Nombre</FormLabel>
+            <input   onChange={handleNameInput} type="text" placeholder="Nombre Apellido" value={name} required />
           </Flex> 
 
         
@@ -109,8 +109,8 @@ export const RegisterForm = ({handleShow}) => {
             // </FormErrorMessage>
           )}
 
-        <Flex marginBottom="1rem">
-          <FormLabel>Email</FormLabel>   
+        <Flex flexDir="column" marginBottom="1rem">
+          <FormLabel flexDir="column">Email</FormLabel>   
           <input onChange={handleEmailInput}  type="email" placeholder="Correo"  value={email} />
         </Flex> 
         {emailValidation ?''
@@ -124,7 +124,7 @@ export const RegisterForm = ({handleShow}) => {
           // </FormErrorMessage>
         )
         }
-        <Flex marginBottom="1rem">
+        <Flex flexDir="column" marginBottom="1rem">
           <FormLabel>Telefono</FormLabel>
           <input onChange={handlePhoneInput} type="text" placeholder="Telefono" value={phone}  />
         </Flex>
@@ -142,7 +142,7 @@ export const RegisterForm = ({handleShow}) => {
         )
 
         }
-        <Flex marginBottom="1rem">
+        <Flex flexDir="column" marginBottom="1rem">
           <FormLabel>Contraseña</FormLabel>
           <input onChange={handlePasswordInput}  type="password" placeholder="Contraseña"  />
         </Flex>
