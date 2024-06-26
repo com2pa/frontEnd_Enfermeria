@@ -1,8 +1,9 @@
-import { Box, Button, ButtonGroup, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, useToast} from '@chakra-ui/react';
+import {  Button, ButtonGroup, Flex, FormControl,  FormHelperText, FormLabel, Heading, useToast, } from '@chakra-ui/react';
 import { useEffect, useState } from 'react'
 import FormContainer from './From';
-import { baseUrl } from '../../config/url';
+// import { FcCheckmark } from "react-icons/fc";
 import axios from 'axios';
+import { useNavigate } from 'react-router';
 
 
 // regex
@@ -11,7 +12,7 @@ const REGEX_NAME = /^[A-Z][a-z]*[ ][A-Z][a-z]*$/;
 const REGEX_NUMBER = /^[0](212|412|414|424|416|426)[0-9]{7}$/;
 const REGEX_PASS =/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,15}$/;
 
-export const RegisterForm = ({handleShow}) => {
+export const RegisterForm = () => {
   const[name,setName]=useState('');
   const[nameValidation, setNameValidation]=useState(false);
 
@@ -26,9 +27,11 @@ export const RegisterForm = ({handleShow}) => {
   const[phoneValidation, setPhoneValidation]=useState(false);
 
   const toast = useToast();
+  const navigation = useNavigate();
 
   const handleNameInput = ({target})=>{
     setName(target.value);
+    // console.log(target.value)
   }
   const handleEmailInput = ({target})=>{
     setEmail(target.value);
@@ -42,29 +45,37 @@ export const RegisterForm = ({handleShow}) => {
 
   const handleNewUser = async ()=>{
     try {
-      const{data} = await axios.post(`${baseUrl}/api/users`);
+      console.log(1);
+      const{data} = await axios.post(`/api/users`,{name,email,phone,password});
+      
       toast({
         position:'top',
         title: 'Success',
-        description: data.message,
-        status:'Correcto',
+        description: 'Se te va ha enviar un correo de verificacion a tu correo',
+        // description:'usuario creado',
+        status:'success',
         // duration: 9000,
         // isClosable: true,
       });
-      handleShow();
+      //handleShow();
+      // navigation('/login');
+      // console.log(handleShow())
+      // console.log('Captured Data:', { name, email, password, phone });
     } catch (error) {
       toast({
         position:'top',
         title: 'Error',
+        status: 'error',
+        // description:"hubo un error",
         description: error.response.data.error,
-        status: 'Hubo un error verique sus datos !',
+        // status: 'Hubo un error verique sus datos !',
         // duration: 9000,
         // isClosable: true,
       })
       console.log(error);
     }
+    
   }
-
 
   useEffect(()=>{
     setNameValidation(REGEX_NAME.test(name))
@@ -89,14 +100,12 @@ export const RegisterForm = ({handleShow}) => {
       <Heading>Register</Heading>
       <FormControl isRequired>
         
-          <Flex  flexDir="column" marginBottom="1rem" >
-            <FormLabel  >Nombre</FormLabel>
-            <input   onChange={handleNameInput} type="text" placeholder="Nombre Apellido" value={name} required />
-          </Flex> 
-
-        
+          <Flex flexDir="column" marginBottom="1rem">            
+              <FormLabel  >Nombre</FormLabel>              
+              <input   onChange={handleNameInput}   type="text" placeholder="Nombre Apellido" value={name} required />
+          </Flex>
           {nameValidation  ? ''
-            
+ 
           : ( 
             <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
                 <p> Debe comenzar con mayuscula tanto el nombre como apellido</p>
@@ -170,14 +179,18 @@ export const RegisterForm = ({handleShow}) => {
         
       </FormControl>
       <ButtonGroup>
-        <Button onClick={handleShow} variant="ghost"> Ingresar</Button>
-        <Button colorScheme="green" onClick={handleNewUser}>Register</Button>
+        {/* onClick={handleShow} */}
+        <Button  variant="ghost"> Ingresar</Button>
+        
+        <Button  colorScheme="green" onClick={handleNewUser} >Register</Button>
+        {/* onClick={handleNewUser} */}
       </ButtonGroup>
 
     </FormContainer>
   
-  
+        
   )
+ 
 }
 
 export default RegisterForm;

@@ -1,27 +1,23 @@
-import { Card, CardHeader, Flex,Link,Button,} from '@chakra-ui/react';
-import React from 'react'
-
-
+import { Card, CardHeader, Flex,Button, } from '@chakra-ui/react';
+import { Link as ReactRouterLink } from 'react-router-dom'
 export const Menu = () => {
   return (
        
     <Card>
+      {/* <img src={logo} className='App-logo' style="widtg:5rem"  alt='logo'/> */}
       <CardHeader>
-        <Flex gap="2" justifyContent="end">         
-           <Button colorScheme='teal' variant='outline'>    
-            <Link  href='/home'>Home</Link>
+        
+        <Flex gap="2" justifyContent="end">
+        
+          <Button as={ReactRouterLink} colorScheme='teal' variant='outline' to='/home'>Home
            </Button>
-           <Button colorScheme='teal' variant='outline'>    
-            <Link  href='/about'>About</Link>
+           <Button as={ReactRouterLink} colorScheme='teal' variant='outline'   to='/about'>About    
            </Button>
-           <Button colorScheme='teal' variant='outline'>    
-            <Link  href='/services'>Services</Link>
+           <Button as={ReactRouterLink} colorScheme='teal' variant='outline'to='/services'>Services    
            </Button>
-           <Button colorScheme='teal' variant='outline'>    
-            <Link  href='/contact'>Contact</Link>
+           <Button as={ReactRouterLink} colorScheme='teal' variant='outline'to='/contact'>Contact 
            </Button>
-           <Button colorScheme='teal' variant='outline'>    
-            <Link  href='/sesion'>Sesion</Link>
+           <Button as={ReactRouterLink} colorScheme='teal' variant='outline' to='/sesion'>Sesion    
            </Button>
         </Flex>
 

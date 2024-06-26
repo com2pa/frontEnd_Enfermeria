@@ -12,7 +12,7 @@ const FormContainer = ({children}) => {
     m="10%"
     align="center"
     justify="center"
-  
+    
   >
     {children}
   </Flex>
