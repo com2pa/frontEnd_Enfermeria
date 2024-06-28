@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from '../pages/Home';
 import About from '../pages/About';
@@ -10,7 +10,8 @@ import Menu from '../layout/Menu';
 import Index from '../pages/Login/Index';
 import RegisterFrom from '../pages/Login/RegisterForm';
 import LoginForm from '../pages/Login/LoginForm';
-import SidebarWithHeader from '../pages/Login/SidebarWithHeader';
+import Verify from '../pages/verify';
+
 export const Root = () => {
   return (
   
@@ -26,8 +27,9 @@ export const Root = () => {
             <Route path='/sesion' element={<Index/>}/>
             <Route path='/Register' element={<RegisterFrom/>}/>
             <Route path='/Login' element={<LoginForm/>}/>
-            <Route path='/Dashboard' element={<SidebarWithHeader/>}/> 
+            <Route path='/verify/:token' element={<Verify />}/>
             
+
             
             
         </Routes>
