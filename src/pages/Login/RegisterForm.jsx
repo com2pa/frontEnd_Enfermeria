@@ -51,16 +51,15 @@ export const RegisterForm = () => {
       toast({
         position:'top',
         title: 'Success',
-        description: 'Se te va ha enviar un correo de verificacion a tu correo',
+        description: data,
         // description:'usuario creado',
         status:'success',
-        // duration: 9000,
+        duration: 4000,
         // isClosable: true,
       });
       //handleShow();
       // navigation('/login');
-      // console.log(handleShow())
-      // console.log('Captured Data:', { name, email, password, phone });
+     
     } catch (error) {
       toast({
         position:'top',
@@ -153,7 +152,7 @@ export const RegisterForm = () => {
         }
         <Flex flexDir="column" marginBottom="1rem">
           <FormLabel>Contraseña</FormLabel>
-          <input onChange={handlePasswordInput}  type="password" placeholder="Contraseña"  />
+          <input onChange={handlePasswordInput}  type="password" placeholder="Contraseña"  value={password}  />
         </Flex>
         { passwordValidation ? ''
 
