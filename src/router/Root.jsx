@@ -11,6 +11,7 @@ import Index from '../pages/Login/Index';
 import RegisterFrom from '../pages/Login/RegisterForm';
 import LoginForm from '../pages/Login/LoginForm';
 import Verify from '../pages/verify';
+import SidebarWithHeader from '../pages/Login/SidebarWithHeader';
 
 export const Root = () => {
   return (
@@ -27,8 +28,8 @@ export const Root = () => {
             <Route path='/sesion' element={<Index/>}/>
             <Route path='/Register' element={<RegisterFrom/>}/>
             <Route path='/Login' element={<LoginForm/>}/>
-            <Route path='/verify/:token' element={<Verify />}/>
-            
+            <Route path='/verify/:id/:token' element={<Verify />}/>
+            <Route path='/SidebarWithHeader' element={<SidebarWithHeader/>} />
 
             
             
