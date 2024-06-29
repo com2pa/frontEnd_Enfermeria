@@ -1,4 +1,4 @@
-import {  Button, ButtonGroup, Flex, FormControl,  FormHelperText, FormLabel, Heading, useToast, } from '@chakra-ui/react';
+import {  Button, ButtonGroup, Flex, FormControl,  FormHelperText, FormLabel, Heading, Spinner, useToast, } from '@chakra-ui/react';
 import { useEffect, useState } from 'react'
 import FormContainer from './From';
 // import { FcCheckmark } from "react-icons/fc";
@@ -25,6 +25,8 @@ export const RegisterForm = () => {
 
   const[phone,setPhone]=useState('');
   const[phoneValidation, setPhoneValidation]=useState(false);
+
+  // const [visible ,setVisible] = useState(false)
 
   const toast = useToast();
   const navigation = useNavigate();
@@ -184,7 +186,6 @@ export const RegisterForm = () => {
         <Button  colorScheme="green" onClick={handleNewUser} >Register</Button>
         {/* onClick={handleNewUser} */}
       </ButtonGroup>
-
     </FormContainer>
   
         
