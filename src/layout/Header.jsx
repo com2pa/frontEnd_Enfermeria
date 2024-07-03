@@ -1,6 +1,6 @@
-import { Card, CardHeader, Flex } from '@chakra-ui/react';
+import { Card, CardHeader, Flex, Image } from '@chakra-ui/react';
 import React from 'react';
-
+// import Nursing from '../../public/Nursing'
 
 
 export const Header = () => {
@@ -10,7 +10,7 @@ export const Header = () => {
     <Card pos='static' > 
      <CardHeader h='5rem' >
       <Flex gap='1' justify='space-evenly'  >
-        <p>logo</p>
+        {/* <Image src={Nursing} alt='Dan Abramov' w="5rem" height="auto" /> */}
         <p> hora</p>
         <p>usuario</p>
 
