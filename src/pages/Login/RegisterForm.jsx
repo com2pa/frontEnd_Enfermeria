@@ -1,4 +1,4 @@
-import {  Button, ButtonGroup, Flex, FormControl,  FormHelperText, FormLabel, Heading, Spinner, useToast, } from '@chakra-ui/react';
+import {  Button, ButtonGroup, Flex, FormControl,  FormHelperText, FormLabel, Heading, Spinner, useToast, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react'
 import FormContainer from './From';
 // import { FcCheckmark } from "react-icons/fc";
@@ -12,7 +12,7 @@ const REGEX_NAME = /^[A-Z][a-z]*[ ][A-Z][a-z]*$/;
 const REGEX_NUMBER = /^[0](212|412|414|424|416|426)[0-9]{7}$/;
 const REGEX_PASS =/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,15}$/;
 
-export const RegisterForm = () => {
+export const RegisterForm = ({handleShow}) => {
   const[name,setName]=useState('');
   const[nameValidation, setNameValidation]=useState(false);
 
@@ -100,93 +100,101 @@ export const RegisterForm = () => {
     <FormContainer>
       <Heading>Register</Heading>
       <FormControl isRequired>
-        
-          <Flex flexDir="column" marginBottom="1rem">            
-              <FormLabel  >Nombre</FormLabel>              
-              <input   onChange={handleNameInput}   type="text" placeholder="Nombre Apellido" value={name} required />
+        <FormControl isInvalid={!nameValidation && name}>
+          <Flex flexDir="column" marginBottom="1rem">
+            <FormLabel  >Nombre</FormLabel>
+            <Input onChange={handleNameInput} type="text" placeholder="Nombre Apellido" value={name} required />
           </Flex>
-          {nameValidation  ? ''
- 
-          : ( 
-            <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
+
+          {nameValidation ? ''
+
+            : (
+              <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
                 <p> Debe comenzar con mayuscula tanto el nombre como apellido</p>
                 <p>1.- Primer caracter en Mayuscula del nombre seguido el resto del nombre en minuscula</p>
                 <p>2.- Primer caracter en Mayuscula deL apellido seguido el resto del nombre en minuscula
-                Merwil Vegas</p>
-            </FormHelperText>
-            // <FormErrorMessage>
-            //     Tu nombre no es valido
-            // </FormErrorMessage>
-          )}
+                  Merwil Vegas</p>
+              </FormHelperText>
+              // <FormErrorMessage>
+              //     Tu nombre no es valido
+              // </FormErrorMessage>
+            )}
+        </FormControl>
 
-        <Flex flexDir="column" marginBottom="1rem">
-          <FormLabel flexDir="column">Email</FormLabel>   
-          <input onChange={handleEmailInput}  type="email" placeholder="Correo"  value={email} />
-        </Flex> 
-        {emailValidation ?''
-         
-        : (
-          <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
-            Debe ser un correo valido
-          </FormHelperText>
-          // <FormErrorMessage>
-          //   Tu correo no es valido
-          // </FormErrorMessage>
-        )
-        }
-        <Flex flexDir="column" marginBottom="1rem">
-          <FormLabel>Telefono</FormLabel>
-          <input onChange={handlePhoneInput} type="text" placeholder="Telefono" value={phone}  />
-        </Flex>
-        {phoneValidation ?''
-          
-        :(
-          <FormHelperText  color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
-            Debe ser un numero de telefono valido
-            <p>1-. Debe comenzar con 0</p>
-            <p>2.- seguido 212  o 412 o 414 o 416 424  o 426</p>
-          </FormHelperText>
-          // <FormErrorMessage>
-          //   Tu numero de telefono no es valido
-          // </FormErrorMessage>
-        )
+        <FormControl isInvalid={!emailValidation && email}>
+          <Flex flexDir="column" marginBottom="1rem">
+            <FormLabel flexDir="column">Email</FormLabel>
+            <Input onChange={handleEmailInput} type="email" placeholder="Correo" value={email} />
+          </Flex>
+          {emailValidation ? ''
 
-        }
-        <Flex flexDir="column" marginBottom="1rem">
-          <FormLabel>Contraseña</FormLabel>
-          <input onChange={handlePasswordInput}  type="password" placeholder="Contraseña"  value={password}  />
-        </Flex>
-        { passwordValidation ? ''
+            : (
+              <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
+                Debe ser un correo valido
+              </FormHelperText>
+              // <FormErrorMessage>
+              //   Tu correo no es valido
+              // </FormErrorMessage>
+            )
+          }
 
-          
+        </FormControl>
+        <FormControl isInvalid={!phoneValidation && phone}>
+          <Flex flexDir="column" marginBottom="1rem">
+            <FormLabel>Telefono</FormLabel>
+            <Input onChange={handlePhoneInput} type="text" placeholder="Telefono" value={phone} />
+          </Flex>
+          {phoneValidation ? ''
 
-          :(
-            <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
-            <p>Debe contener al menos una mayuscula, una minuscula, un numero y un caracter especial </p> 
-            <p>1.- Contiene al menos una letra mayúscula ([A-Z]). </p>
-            <p>2.- Contiene al menos una letra minúscula ([a-z]). </p>
-            <p>3.- Contiene al menos un dígito . </p>
-            <p>4.- No tiene espacios en blanco. </p>
-            <p>5.- Contiene al menos un carácter especial que no sea letra ni dígito . </p>
-            <p>6.- Tiene una longitud total entre 8 y 15 caracteres. </p>
-          </FormHelperText>
-            // <FormErrorMessage>
-            //   Tu contraseña no es valida
-            // </FormErrorMessage>
+            : (
+              <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
+                Debe ser un numero de telefono valido
+                <p>1-. Debe comenzar con 0</p>
+                <p>2.- seguido 212  o 412 o 414 o 416 424  o 426</p>
+              </FormHelperText>
+              // <FormErrorMessage>
+              //   Tu numero de telefono no es valido
+              // </FormErrorMessage>
+            )
 
-          )
-        }
-        {/* <input type="password" placeholder="Confirmar contraseña" /> */}
-        
+          }
+
+        </FormControl>
+        <FormControl isInvalid={!passwordValidation && password}>
+          <Flex flexDir="column" marginBottom="1rem">
+            <FormLabel>Contraseña</FormLabel>
+            <Input onChange={handlePasswordInput} type="password" placeholder="Contraseña" value={password} />
+          </Flex>
+          {passwordValidation ? ''
+
+
+
+            : (
+              <FormHelperText color='red' border='0.5px solid red' margin='0.5rem' padding='1rem'>
+                <p>Debe contener al menos una mayuscula, una minuscula, un numero y un caracter especial </p>
+                <p>1.- Contiene al menos una letra mayúscula ([A-Z]). </p>
+                <p>2.- Contiene al menos una letra minúscula ([a-z]). </p>
+                <p>3.- Contiene al menos un dígito . </p>
+                <p>4.- No tiene espacios en blanco. </p>
+                <p>5.- Contiene al menos un carácter especial que no sea letra ni dígito . </p>
+                <p>6.- Tiene una longitud total entre 8 y 15 caracteres. </p>
+              </FormHelperText>             
+
+            )
+          }          
+
+        </FormControl>
+
       </FormControl>
       <ButtonGroup>
         {/* onClick={handleShow} */}
-        <Button  variant="ghost"> Ingresar</Button>
-        
-        <Button  colorScheme="green" onClick={handleNewUser} >Register</Button>
+        <Button variant="ghost" onClick={handleShow}>  Ingresar</Button>
+
+        <Button isDisabled={!phoneValidation || !nameValidation || !emailValidation || !passwordValidation} colorScheme="green" onClick={handleNewUser} >Register</Button>
         {/* onClick={handleNewUser} */}
       </ButtonGroup>
     </FormContainer>
+
   
         
   )
