@@ -30,6 +30,7 @@ export const Root = () => {
             <Route path='/Login' element={<LoginForm/>}/>
             <Route path='/verify/:id/:token' element={<Verify />}/>
             <Route path='/SidebarWithHeader' element={<SidebarWithHeader/>} />
+            
 
             
             
