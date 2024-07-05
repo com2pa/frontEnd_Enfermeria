@@ -1,6 +1,6 @@
 import { useState,useEffect } from 'react'
 import FormContainer from './From';
-import { Button, ButtonGroup, Flex, FormControl, FormLabel, Heading,Input, Toast } from '@chakra-ui/react';
+import { Button, ButtonGroup, Flex, FormControl, FormLabel, Heading,Input, useToast } from '@chakra-ui/react';
 // import { Navigate} from 'react-router';
 import axios from 'axios';
 
@@ -20,17 +20,21 @@ const LoginForm = ({handleShow}) => {
   const[password, setPassword] = useState('');
   const[passwordValidation,setPasswordValidation] = useState(true)
 
-  const [isLoginValid, setIsLoginValid] = useState(false);
+  const [isLoginValid, setIsLoginValid] = useState(true);
   
   const handleEmailInput=({target})=>{
     setEmail(target.value);
     // console.log(target.value)
 
   }
+  const toast = useToast();
   const handlePassword=({target})=>{
     setPassword(target.value);
     // console.log(target.value)
   }
+
+  const [isLoading, setIsLoading] = useState(false)
+
   useEffect(()=>{
     setEmailValidation(REGEX_EMAIL.test(email))
   },[email]);
@@ -41,60 +45,66 @@ const LoginForm = ({handleShow}) => {
 
   useEffect(() => {
     setIsLoginValid(emailValidation && passwordValidation);
+    
   }, [emailValidation, passwordValidation]);
 
-  
+  useEffect(() => {
+    if (isLoginValid) {
+      setIsLoading(true);
+    } else {
+      setIsLoading(false);
+    }
+  }, [isLoginValid]);
+
   const handleLogin = async (e)=>{
    e.preventDefault()
+   
+
+
+   
     try{
       const user ={
       user_id: 1,
       email,
       password,
       }
-    
-      
-      
-      // if(email === user.email){      
-      //   console.log('Login correcto')
-      // }
-      // if(password === user.password){
-      //   console.log('Login correcto')
-      // }else{
-      //   console.log('Contraseña incorrecta')
-      // }
       const response = await axios.post('/api/login',user);
-
-
+      setIsLoading(false)
+     
       if (response.data) {
-        console.log('Login correcto');
-        Toast({
-          position:'top',
-          title: 'Success',
-          description: 'ingresando',          
-          status:'success',
-          duration: 4000,
-          
+        // console.log('Login correcto');
+        toast({
+          title: 'Login correcto',
+          description: response.data.message,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
         });
         // window.location.pathname = `/SidebarWithHeader/`;
       } else {
-        console.log('Correo o contraseña incorrectos');
-        Toast({
-          position:'top',
-          title: 'Error',
+        // console.log('Correo o contraseña incorrectos');
+        toast({
+          title: 'Error de inicio de sesión',
+          description: response.data.messege,
           status: 'error',
-          description:"hubo un error en el email o contraseña",
-          // description: error.response.data.error,
-          duration: 9000,
-          
-        })
+          duration: 3000,
+          isClosable: true,
+        });
+        
       }
 
       
       // window.location.pathname =`/SidebarWithHeader/`
     }catch(error){
+      setIsLoading(false);
       console.log(error)      
-   
+      toast({
+        title: 'datos de ingresados',
+        description: error.response.data.error,
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
       
     }
     
@@ -122,9 +132,11 @@ const LoginForm = ({handleShow}) => {
         </FormControl>
       <ButtonGroup mt='1rem'>
         <Button onClick={handleShow}  variant="ghost">Register</Button>
-        <Button onClick={handleLogin} colorScheme="green" isDisabled={!isLoginValid}  >Ingresar</Button>
+        <Button onClick={handleLogin }colorScheme="green" isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
       </ButtonGroup>
+        
     </FormContainer>
+    
   )
 }
 export default LoginForm;
