@@ -46,6 +46,7 @@ import {
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
+  Heading,
   
 } from '@chakra-ui/react'
 import {
@@ -56,21 +57,22 @@ import {
   
 } from '@chakra-ui/icons'
 import React from 'react'
-import { Link as ReactRouterLink } from 'react-router-dom'
-export default function WithSubnavigation() {
+import { Outlet, Link as ReactRouterLink } from 'react-router-dom'
+
+export  function Menu() {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <Box>
+    <><Outlet /><Box>
       <Flex
-        bg={useColorModeValue('white', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
+        bg={useColorModeValue('red.600', 'White.300')}
+        color={useColorModeValue('red.600', 'White.300')}
         minH={'60px'}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
+        borderColor={useColorModeValue('red.600', 'White.300')}
         align={'center'}>
         <Flex
           flex={{ base: 1, md: 'auto' }}
@@ -80,8 +82,7 @@ export default function WithSubnavigation() {
             onClick={onToggle}
             icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
             variant={'ghost'}
-            aria-label={'Toggle Navigation'}
-          />
+            aria-label={'Toggle Navigation'} />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
           {/* <Text
@@ -89,9 +90,10 @@ export default function WithSubnavigation() {
             fontFamily={'heading'}
             color={useColorModeValue('gray.800', 'white')}>
             Logo...
-          </Text> */}
-          
-          
+         </Text> */}
+         <Heading color="red.600"  shadow="dark-lg "p='1' rounded='sm' bg='white'>NURSING AT HOME</Heading>
+
+
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
           </Flex>
@@ -102,7 +104,7 @@ export default function WithSubnavigation() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-          <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}>
+          <Button as={ReactRouterLink} fontSize={'sm'} fontWeight={400} variant={'link'} color={'white'} to="/Login">
             Sign In
           </Button>
           <Button
@@ -124,14 +126,14 @@ export default function WithSubnavigation() {
       <Collapse in={isOpen} animateOpacity>
         <MobileNav />
       </Collapse>
-    </Box>
+    </Box></>
   )
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
+  const linkColor = useColorModeValue('white', 'White.300')
   const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
+  const popoverContentBgColor = useColorModeValue('white', 'white.300')
 
   return (
     <Stack direction={'row'} spacing={4}>
@@ -202,7 +204,8 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           opacity={0}
           _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
           justify={'flex-end'}
-          align={'center'}
+          // align={'center'}
+          alignItems={'center'}
           flex={1}>
           <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
@@ -255,7 +258,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
           pl={4}
           borderLeft={1}
           borderStyle={'solid'}
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
+          borderColor={useColorModeValue('gray.600', 'gray.700')}
           align={'start'}>
           {children &&
             children.map((child) => (
@@ -280,6 +283,7 @@ const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Home',
     href: '/Home',
+    
     // children: [
     //   {
     //     label: 'Explore Design Work',
@@ -306,3 +310,5 @@ const NAV_ITEMS: Array<NavItem> = [
     href: '/Contact',
   },
 ]
+
+export default Menu;

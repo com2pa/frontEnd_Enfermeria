@@ -34,6 +34,12 @@ import {
 } from 'react-icons/fi'
 import { IconType } from 'react-icons'
 import React from 'react'
+import { useAuth } from '../../hooks/useAuth'
+import CreateServicio from '../Services/CreateServicio'
+
+
+
+
 
 interface LinkItemProps {
   name: string
@@ -52,16 +58,17 @@ interface MobileProps extends FlexProps {
 interface SidebarProps extends BoxProps {
   onClose: () => void
 }
-
+// menu lateral
 const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
+  { name: 'Services', icon: FiTrendingUp },
   { name: 'Explore', icon: FiCompass },
   { name: 'Favourites', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
 ]
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+ 
   return (
     <Box
       transition="3s ease"
@@ -91,7 +98,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
   return (
     <Box
       as="a"
-      href="#"
+      href="/Servicio"
       style={{ textDecoration: 'none' }}
       _focus={{ boxShadow: 'none' }}>
       <Flex
@@ -123,6 +130,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
 }
 
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const {auth} = useAuth()
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -167,7 +175,8 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                    {/* colocando usuario  */}
+                  <Text fontSize="sm">{auth?.name}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
@@ -214,6 +223,9 @@ const SidebarWithHeader = () => {
       <MobileNav onOpen={onOpen} />
       <Box ml={{ base: 0, md: 60 }} p="4">
         {/* Content */}
+        <Text>Welcome to the Enfermeria</Text>
+        <CreateServicio/>
+        
       </Box>
     </Box>
   )

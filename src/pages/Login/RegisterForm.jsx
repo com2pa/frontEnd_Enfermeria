@@ -1,7 +1,6 @@
 import {  Button, ButtonGroup, Flex, FormControl,  FormHelperText, FormLabel, Heading, Spinner, useToast, Input } from '@chakra-ui/react';
 import { useEffect, useState } from 'react'
 import FormContainer from './From';
-// import { FcCheckmark } from "react-icons/fc";
 import axios from 'axios';
 import { useNavigate } from 'react-router';
 
@@ -103,7 +102,7 @@ export const RegisterForm = ({handleShow}) => {
         <FormControl isInvalid={!nameValidation && name}>
           <Flex flexDir="column" marginBottom="1rem">
             <FormLabel  >Nombre</FormLabel>
-            <Input onChange={handleNameInput} type="text" placeholder="Nombre Apellido" value={name} required />
+            <Input onChange={handleNameInput} type="text" placeholder="Nombre Apellido" value={name} autoComplete="off" required />
           </Flex>
 
           {nameValidation ? ''
@@ -124,7 +123,7 @@ export const RegisterForm = ({handleShow}) => {
         <FormControl isInvalid={!emailValidation && email}>
           <Flex flexDir="column" marginBottom="1rem">
             <FormLabel flexDir="column">Email</FormLabel>
-            <Input onChange={handleEmailInput} type="email" placeholder="Correo" value={email} />
+            <Input onChange={handleEmailInput} type="email" placeholder="Correo" autoComplete="off" value={email} />
           </Flex>
           {emailValidation ? ''
 
@@ -142,7 +141,7 @@ export const RegisterForm = ({handleShow}) => {
         <FormControl isInvalid={!phoneValidation && phone}>
           <Flex flexDir="column" marginBottom="1rem">
             <FormLabel>Telefono</FormLabel>
-            <Input onChange={handlePhoneInput} type="text" placeholder="Telefono" value={phone} />
+            <Input onChange={handlePhoneInput} type="text" placeholder="Telefono" autoComplete="off" value={phone} />
           </Flex>
           {phoneValidation ? ''
 
@@ -163,7 +162,7 @@ export const RegisterForm = ({handleShow}) => {
         <FormControl isInvalid={!passwordValidation && password}>
           <Flex flexDir="column" marginBottom="1rem">
             <FormLabel>Contraseña</FormLabel>
-            <Input onChange={handlePasswordInput} type="password" placeholder="Contraseña" value={password} />
+            <Input onChange={handlePasswordInput} type="password" placeholder="Contraseña" autoComplete="off" value={password} />
           </Flex>
           {passwordValidation ? ''
 

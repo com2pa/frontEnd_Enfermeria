@@ -1,46 +1,28 @@
 
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from '../pages/Home';
-import About from '../pages/About';
-import Services from'../pages/Services';
-import Contact from'../pages/Contact';
-import Header from '../layout/Header';
-import Footer from '../layout/Footer';
-import Menu from '../layout/Menu';
-import Index from '../pages/Login/Index';
-import RegisterFrom from '../pages/Login/RegisterForm';
-import LoginForm from '../pages/Login/LoginForm';
-import Verify from '../pages/verify';
-import SidebarWithHeader from '../pages/Login/SidebarWithHeader';
+import { BrowserRouter, } from 'react-router-dom';
+import axios from 'axios';
+import Public from '../router/Public';
+import PrivateRoute from '../router/PrivateRoute'
+import { useAuth } from '../hooks/useAuth';
+import PersistAuth from '../components/PersistAuth';
+
+
+
 
 export const Root = () => {
-  return (
-  
-    <BrowserRouter>
-    <Header/>
-    <Menu/>    
-        <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/Home' element={<Home/>}/>
-            <Route path='/About' element={<About />}/>
-            <Route path='/Services' element={<Services />}/>
-            <Route path='/Contact' element={<Contact/>}/>
-            <Route path='/sesion' element={<Index/>}/>
-            <Route path='/Register' element={<RegisterFrom/>}/>
-            <Route path='/Login' element={<LoginForm/>}/>
-            <Route path='/verify/:id/:token' element={<Verify />}/>
-            <Route path='/SidebarWithHeader' element={<SidebarWithHeader/>} />
-            
 
-            
-            
-        </Routes>
-        <Footer/>
+  return (
+
+
+    <BrowserRouter>
+      
+      <PrivateRoute />
+      <Public />
     </BrowserRouter>
-   
-   
+
+
   )
-  
+
 }
 
 export default Root;

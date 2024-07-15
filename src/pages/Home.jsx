@@ -3,7 +3,7 @@ import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
 import { Box, Button, Card,  Flex, FormControl, FormLabel, Heading,    Image,    Input,   InputGroup,   InputLeftElement,    Select,   Text, Textarea, VStack,  } from "@chakra-ui/react";
 import {  BsPerson } from "react-icons/bs";
 import {  MdLocationOn, MdOutlineCalendarToday, MdOutlineEmail, MdPhone } from "react-icons/md";
-
+import Enfermera from '../assets/Enfermera.jpg'
 
 
 export const Home = () => {
@@ -33,8 +33,8 @@ export const Home = () => {
               </Text>            
             </Flex>
           </Card>
-          <Box boxSize='50%'>
-            <Image src='' alt='Enfermera' />
+          <Box boxSize='60%'>
+            <Image src={Enfermera} alt="cerrar-equipo-listo-trabajar" h="100vh" w="100%"  />
           </Box>
         </Flex>
       </Box>

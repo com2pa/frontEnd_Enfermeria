@@ -1,15 +1,10 @@
-import React from "react";
+import AuthProvider from "./context/AuthContext";
 import Root from "./router/Root";
 function App() {
-  
-
   return (
-    <> 
-     {/*rutas  */}
-      {/* header */}
-      <Root/>
-      
-    </>
+    <AuthProvider>
+      <Root />
+    </AuthProvider>
   )
 }
 

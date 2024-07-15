@@ -1,51 +1,52 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect, } from 'react'
 import FormContainer from './From';
-import { Button, ButtonGroup, Flex, FormControl, FormLabel, Heading,Input, useToast } from '@chakra-ui/react';
+import { Button, ButtonGroup, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
 // import { Navigate} from 'react-router';
 import axios from 'axios';
+import { useAuth } from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
+// import AuthContext from '../../hooks/useAuth';
 
-const REGEX_EMAIL=/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-const REGEX_PASS =/^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,15}$/;
+const REGEX_EMAIL = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+const REGEX_PASS = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,15}$/;
 
-const LoginForm = ({handleShow}) => {
-  // const[email,setEmail]=useState('');
-  // const[emailValidation, setEmailValidation]=useState(false);
+const LoginForm = ({ handleShow }) => {
+  const { setAuth } = useAuth();
 
-  // const[password,setPassword]=useState('');
-  // const[passwordValidation, setPasswordValidation]=useState(false);
-  
-  const[email, setEmail] = useState('');
-  const[emailValidation,setEmailValidation]= useState(true)
 
-  const[password, setPassword] = useState('');
-  const[passwordValidation,setPasswordValidation] = useState(true)
+  const [email, setEmail] = useState('');
+  const [emailValidation, setEmailValidation] = useState(true)
+
+  const [password, setPassword] = useState('');
+  const [passwordValidation, setPasswordValidation] = useState(true)
 
   const [isLoginValid, setIsLoginValid] = useState(true);
-  
-  const handleEmailInput=({target})=>{
+
+  const handleEmailInput = ({ target }) => {
     setEmail(target.value);
     // console.log(target.value)
 
   }
   const toast = useToast();
-  const handlePassword=({target})=>{
+  const navegate = useNavigate()
+  const handlePassword = ({ target }) => {
     setPassword(target.value);
     // console.log(target.value)
   }
 
   const [isLoading, setIsLoading] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     setEmailValidation(REGEX_EMAIL.test(email))
-  },[email]);
+  }, [email]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setPasswordValidation(REGEX_PASS.test(password))
-  },[password]);
+  }, [password]);
 
   useEffect(() => {
     setIsLoginValid(emailValidation && passwordValidation);
-    
+
   }, [emailValidation, passwordValidation]);
 
   useEffect(() => {
@@ -56,21 +57,22 @@ const LoginForm = ({handleShow}) => {
     }
   }, [isLoginValid]);
 
-  const handleLogin = async (e)=>{
-   e.preventDefault()
-   
+  const handleLogin = async (e) => {
+    e.preventDefault()
 
 
-   
-    try{
-      const user ={
-      user_id: 1,
-      email,
-      password,
+
+
+    try {
+      const user = {
+        user_id: 1,
+        email,
+        password,
       }
-      const response = await axios.post('/api/login',user);
+      const response = await axios.post('/api/login', user);
+      setAuth(response.data);
       setIsLoading(false)
-     
+
       if (response.data) {
         // console.log('Login correcto');
         toast({
@@ -80,7 +82,7 @@ const LoginForm = ({handleShow}) => {
           duration: 3000,
           isClosable: true,
         });
-        // window.location.pathname = `/SidebarWithHeader/`;
+
       } else {
         // console.log('Correo o contraseña incorrectos');
         toast({
@@ -90,14 +92,14 @@ const LoginForm = ({handleShow}) => {
           duration: 3000,
           isClosable: true,
         });
-        
+
       }
 
-      
-      // window.location.pathname =`/SidebarWithHeader/`
-    }catch(error){
+      navegate('/SidebarWithHeader')
+      //window.location.pathname =`/Servicio/`
+    } catch (error) {
       setIsLoading(false);
-      console.log(error)      
+      console.log(error)
       toast({
         title: 'datos de ingresados',
         description: error.response.data.error,
@@ -105,10 +107,10 @@ const LoginForm = ({handleShow}) => {
         duration: 3000,
         isClosable: true,
       });
-      
+
     }
-    
-    
+
+
   }
 
 
@@ -118,7 +120,7 @@ const LoginForm = ({handleShow}) => {
       <FormControl isRequired>
         <FormControl>
           <Flex flexDir="column">
-            <FormLabel> Correo </FormLabel>          
+            <FormLabel> Correo </FormLabel>
             <Input onChange={handleEmailInput} type="email" value={email} placeholder="Correo" />
           </Flex>
         </FormControl>
@@ -126,17 +128,17 @@ const LoginForm = ({handleShow}) => {
           <Flex flexDir="column">
             <FormLabel> Contraseña</FormLabel>
             <Input onChange={handlePassword} type="password" value={password} placeholder="Contraseña" />
-            </Flex>
+          </Flex>
         </FormControl>
 
-        </FormControl>
+      </FormControl>
       <ButtonGroup mt='1rem'>
-        <Button onClick={handleShow}  variant="ghost">Register</Button>
-        <Button onClick={handleLogin }colorScheme="green" isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
+        <Button onClick={handleShow} variant="ghost">Register</Button>
+        <Button onClick={handleLogin} colorScheme="green" isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
       </ButtonGroup>
-        
+
     </FormContainer>
-    
+
   )
 }
 export default LoginForm;
