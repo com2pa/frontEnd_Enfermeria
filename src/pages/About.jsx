@@ -1,8 +1,12 @@
 import React from 'react'
+import Menu from '../layout/Menu';
 
 export const About = () => {
   return (
-    <div>About</div>
+    <>
+    <Menu/>
+      <div>About</div>
+    </>
   )
   
 }
