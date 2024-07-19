@@ -1,9 +1,8 @@
 
 import { Route, Routes } from 'react-router-dom';
-import SidebarWithHeader from '../pages/Login/SidebarWithHeader';
-import PersistAuth from '../components/PersistAuth';
-import CreateServicio from '../pages/Services/CreateServicio';
 
+import CreateServicio from '../pages/CreateServicio';
+import PersistAuth from '../components/PersistAuth';
 
 
 
@@ -15,12 +14,12 @@ export const Root = () => {
 
 
     <>
-    <SidebarWithHeader/>
+    
       <Routes>
-        <Route>
-          {/* <Route path='/SidebarWithHeader' element={<SidebarWithHeader />} /> */}
+      <Route element={<PersistAuth />}>
+
+          <Route path='/dashboard' element={<CreateServicio/>}/>
           {/* <Route path='/CreateServicio' element={<CreateServicio/>}/>  */}
-          
         </Route>
       </Routes>
 
