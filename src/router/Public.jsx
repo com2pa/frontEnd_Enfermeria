@@ -17,21 +17,21 @@ export const Root = () => {
     return (
         <>
 
-            <Menu />
+            {/* <Menu /> */}
             <Routes>
                 <Route element={<PersistAuth />}>
-                    <Route path='/' element={<Navigate to='/Home' />} />
-                    <Route path='/Home' element={<Home />} />
+                    <Route path='/' element={<Home />} />
+                    
                 </Route>
-                <Route path='/About' element={<About />} />
-                <Route path='/Services' element={<Services />} />
-                <Route path='/Contact' element={<Contact />} />
+                <Route path='/about' element={<About />} />
+                <Route path='/services' element={<Services />} />
+                <Route path='/contact' element={<Contact />} />
                 <Route path='/sesion' element={<Index />} />
-                <Route path='/Register' element={<RegisterFrom />} />
-                <Route path='/Login' element={<LoginForm />} />
+                <Route path='/register' element={<RegisterFrom />} />
+                <Route path='/login' element={<LoginForm />} />
                 <Route path='/verify/:id/:token' element={<Verify />} />
             </Routes>
-            <Footer />
+            {/*   */}
         </>
     )
 
