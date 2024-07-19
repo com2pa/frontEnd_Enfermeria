@@ -57,7 +57,9 @@ export default function SmallCentered() {
   return (
     <Box
       bg={useColorModeValue('red.600', 'red.300')}
-      color={useColorModeValue('white', 'white')}>
+      color={useColorModeValue('white', 'white')}
+      bottom={0}  
+    >
 
       <Container
         as={Stack}
@@ -96,10 +98,12 @@ export default function SmallCentered() {
           direction={{ base: 'column', md: 'row' }}
           spacing={4}
           justify={{ base: 'center', md: 'space-between' }}
-          align={{ base: 'center', md: 'center' }}>
+          align={{ base: 'center', md: 'center' }}
+           
+        >
           <Text>© 2024 Ingeniero Merwil Vegas. Todos los derechos reservados </Text>
           <Stack direction={'row'} spacing={6}>
-            <SocialButton label={'Twitter'} href={'#'}>
+            {/* <SocialButton label={'Twitter'} href={'#'}>
               <FaTwitter />
             </SocialButton>
             <SocialButton label={'YouTube'} href={'#'}>
@@ -107,7 +111,7 @@ export default function SmallCentered() {
             </SocialButton>
             <SocialButton label={'Instagram'} href={'#'}>
               <FaInstagram />
-            </SocialButton>
+            </SocialButton> */}
           </Stack>
         </Container>
       </Box>
