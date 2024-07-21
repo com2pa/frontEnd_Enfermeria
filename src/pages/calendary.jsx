@@ -3,44 +3,45 @@ import { Button, HStack, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/reac
 
 export const calendary = () => {
    
-        const { headers, body, month, year, navigation } = useCalendar({
-          defaultViewType: CalendarViewType.Week
-        });
+  const { headers, body, month, year, navigation } = useCalendar({
+    defaultViewType: CalendarViewType.Week
+  });
    
   return (
-    <>    
-    <HStack justify="space-between">
-    <HStack>
-      <Button onClick={navigation.toPrev}>&lt;</Button>
-      <Text>{format(new Date(year, month), "MMM yyyy")}</Text>
-      <Button onClick={navigation.toNext}>&gt;</Button>
-    </HStack>
+    <>
+        
+      <HStack justify="space-between">
+        <HStack>
+          <Button onClick={navigation.toPrev}>&lt;</Button>
+          <Text>{format(new Date(year, month), "MMM yyyy")}</Text>
+          <Button onClick={navigation.toNext}>&gt;</Button>
+        </HStack>
         <Button onClick={navigation.setToday}>Today</Button>
-    </HStack>
-    <Table>
+      </HStack>
+      <Table>
         <Thead>
-        <Tr>
+          <Tr>
             {headers.weekDays.map(({ key, value }) => {
-            return <Th key={key}>{format(value, "E")}</Th>;
+              return <Th key={key}>{format(value, "E")}</Th>;
             })}
-        </Tr>
+          </Tr>
         </Thead>
         <Tbody>
-        {body.value.map(({ key, value: days }) => (
+          {body.value.map(({ key, value: days }) => (
             <Tr key={key}>
-            {days.map(({ key, value }) => (
+              {days.map(({ key, value }) => (
                 <Td key={key} color={isToday(value) ? "red.500" : "inherit"}>
-                {getDate(value)}
+                  {getDate(value)}
                 </Td>
-            ))}
+              ))}
             </Tr>
-        ))}
+          ))}
         </Tbody>
-    </Table>
+      </Table>
     </>
 
-    );
+  );
   
-}
+};
 
 export default calendary;
