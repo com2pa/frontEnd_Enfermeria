@@ -1,11 +1,12 @@
-import { useState, useEffect, } from 'react'
+import { useState, useEffect, } from 'react';
 import FormContainer from './From';
 import { Button, ButtonGroup, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
 // import { Navigate} from 'react-router';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
-// import AuthContext from '../../hooks/useAuth';
+import Menu from '../../layout/Menu';
+import Footer from '../../layout/Footer';
 
 const REGEX_EMAIL = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const REGEX_PASS = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[^A-Za-z\d\s]).{8,15}$/;
@@ -15,10 +16,10 @@ const LoginForm = ({ handleShow }) => {
 
 
   const [email, setEmail] = useState('');
-  const [emailValidation, setEmailValidation] = useState(true)
+  const [emailValidation, setEmailValidation] = useState(true);
 
   const [password, setPassword] = useState('');
-  const [passwordValidation, setPasswordValidation] = useState(true)
+  const [passwordValidation, setPasswordValidation] = useState(true);
 
   const [isLoginValid, setIsLoginValid] = useState(true);
 
@@ -26,22 +27,22 @@ const LoginForm = ({ handleShow }) => {
     setEmail(target.value);
     // console.log(target.value)
 
-  }
+  };
   const toast = useToast();
-  const navegate = useNavigate()
+  const navegate = useNavigate();
   const handlePassword = ({ target }) => {
     setPassword(target.value);
     // console.log(target.value)
-  }
+  };
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setEmailValidation(REGEX_EMAIL.test(email))
+    setEmailValidation(REGEX_EMAIL.test(email));
   }, [email]);
 
   useEffect(() => {
-    setPasswordValidation(REGEX_PASS.test(password))
+    setPasswordValidation(REGEX_PASS.test(password));
   }, [password]);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ const LoginForm = ({ handleShow }) => {
   }, [isLoginValid]);
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
 
 
@@ -68,10 +69,10 @@ const LoginForm = ({ handleShow }) => {
         user_id: 1,
         email,
         password,
-      }
+      };
       const response = await axios.post('/api/login', user);
       setAuth(response.data);
-      setIsLoading(false)
+      setIsLoading(false);
 
       if (response.data) {
         // console.log('Login correcto');
@@ -95,11 +96,11 @@ const LoginForm = ({ handleShow }) => {
 
       }
 
-      navegate('/SidebarWithHeader')
+      navegate('/dashboard');
       //window.location.pathname =`/Servicio/`
     } catch (error) {
       setIsLoading(false);
-      console.log(error)
+      console.log(error);
       toast({
         title: 'datos de ingresados',
         description: error.response.data.error,
@@ -111,34 +112,38 @@ const LoginForm = ({ handleShow }) => {
     }
 
 
-  }
+  };
 
 
   return (
-    <FormContainer>
-      <Heading> Login</Heading>
-      <FormControl isRequired>
-        <FormControl>
-          <Flex flexDir="column">
-            <FormLabel> Correo </FormLabel>
-            <Input onChange={handleEmailInput} type="email" value={email} placeholder="Correo" />
-          </Flex>
+    <>
+      <Menu />
+      <FormContainer h="100vh" >
+        <Heading> Login</Heading>
+        <FormControl isRequired>
+          <FormControl>
+            <Flex flexDir="column">
+              <FormLabel> Correo </FormLabel>
+              <Input onChange={handleEmailInput} type="email" value={email} placeholder="Correo" />
+            </Flex>
+          </FormControl>
+          <FormControl>
+            <Flex flexDir="column">
+              <FormLabel> Contraseña</FormLabel>
+              <Input onChange={handlePassword} type="password" value={password} placeholder="Contraseña" />
+            </Flex>
+          </FormControl>
+
         </FormControl>
-        <FormControl>
-          <Flex flexDir="column">
-            <FormLabel> Contraseña</FormLabel>
-            <Input onChange={handlePassword} type="password" value={password} placeholder="Contraseña" />
-          </Flex>
-        </FormControl>
+        <ButtonGroup mt='1rem'>
+          <Button onClick={handleShow} variant="ghost">Register</Button>
+          <Button onClick={handleLogin} colorScheme="green" isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
+        </ButtonGroup>
 
-      </FormControl>
-      <ButtonGroup mt='1rem'>
-        <Button onClick={handleShow} variant="ghost">Register</Button>
-        <Button onClick={handleLogin} colorScheme="green" isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
-      </ButtonGroup>
+      </FormContainer>
+      <Footer/>
+    </>
 
-    </FormContainer>
-
-  )
-}
+  );
+};
 export default LoginForm;
