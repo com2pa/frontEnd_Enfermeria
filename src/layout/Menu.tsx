@@ -282,7 +282,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: 'Home',
-    href: '/Home',
+    href: '/',
     
     // children: [
     //   {
@@ -299,15 +299,15 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'About',
-    href: '/About',
+    href: '/about',
   },
   {
     label: 'Services',
-    href: '/Services',
+    href: '/services',
   },
   {
     label: 'Contact',
-    href: '/Contact',
+    href: '/contact',
   },
 ]
 
