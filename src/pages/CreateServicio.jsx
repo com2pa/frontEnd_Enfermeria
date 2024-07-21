@@ -7,7 +7,7 @@ import SidebarWithHeader from '../pagesPrivate/LayoutPrivate/SidebarWithHeader.j
 import { useAuth } from '../hooks/useAuth.jsx';
 import ServiceCard from './ServiceCard.jsx';
 
-const REGEX_NAME = /^[A-Z][a-z]*[ ][A-Z][a-z]*$/;
+const REGEX_NAME = /^(?=.*[A-Z])[A-Za-z0-9\s!@#$%^&*()_+=[\]{}|;':",.<>?]{1,100}$/;
 
 export const CreateServicio = () => {
 
@@ -20,7 +20,7 @@ export const CreateServicio = () => {
   
   const handleNameInput = ({target})=>{
     setNameService(target.value);
-    console.log(target.value);
+    // console.log(target.value);
   };
   
   useEffect(() => {
@@ -31,7 +31,7 @@ export const CreateServicio = () => {
     getCategories();
   }, [setNewCategorias]);
 
-
+  
 
   const toast = useToast();
 
@@ -48,7 +48,7 @@ export const CreateServicio = () => {
         duration: 4000,
         isClosable: true,
       });
-      console.log(data);
+      console.log('datos ',data);
 
       setNewCategorias(newCategorias.concat(data));
      
@@ -76,38 +76,36 @@ export const CreateServicio = () => {
   // console.log('muestra todo los servicio',newCategorias);
 
   //-- editar 
-  const updateService = async (updateService,)=>{
-    // console.log('servicio a editar', updateService);
-    const id = updateService.id;
-    const name = updateService.NameService;
-    console.log(id,name);
+  const updateService = async (updateService)=>{
+    console.log('servicio a editar', updateService);
+    const id=updateService.id; 
+    const up=updateService.NameService;
+    console.log(id,up);
     
     try {
-      const {data} = await axios.put(`/api/servicio/${id}`,{name});
+      const {data} = await axios.put(`/api/servicio/${updateService.id}`, {NameService: up});
+      console.log('data Enviada',data);  
       toast({
         position:'top',
         title: 'Success',
-        description: data,
+        // description: 'editado',
+        description:data.updateService,
         status:'success',
         duration: 4000,
         isClosable: true,
       });
-      // const updatedServices = newCategorias.map((cat, i) =>
-      //   i === id ? newName : cat
-      // );
-      // // setNameService(updatedServices);
-      // setNewCategorias('');
-    
+     
     }catch(error){
       console.log(error);
       toast({
         position:'top',
         title: 'Error',
         status: 'error',
-        // description: error.response.data.error,
+        description: error.response.data.error,
         duration: 9000,
         isClosable: true,
       });
+      
     }
   };
 
@@ -121,7 +119,7 @@ export const CreateServicio = () => {
 
       const updatedCategorias = newCategorias.filter((cat) =>  cat.id !== id);
       setNewCategorias(updatedCategorias);
-      // console.log(newCategorias);
+      // console.log(updatedCategorias);
       
       toast({
         position:'top',
@@ -200,7 +198,7 @@ export const CreateServicio = () => {
         al componente ServiceCard
       */}
       <List>
-        {newCategorias.map((service) => (
+        {/* {newCategorias.map((service) => (
          
           <ServiceCard
             key={service.id} 
@@ -209,6 +207,14 @@ export const CreateServicio = () => {
             updateService={updateService}
             handleDelete={handleDelete}
             service={service} 
+          />
+        ))} */}
+        {newCategorias.map((cat) => (
+          <ServiceCard 
+            key={cat.id} 
+            handleDelete={handleDelete} 
+            service={cat} 
+            updateService={updateService}
           />
         ))}
       </List>
