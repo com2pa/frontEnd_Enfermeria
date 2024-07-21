@@ -20,9 +20,16 @@ const ServiceCard= ({service, handleDelete, updateService}) => {
     } else {
       console.log('SERVICIO ANTES', service);
       const updatedService = {...service, NameService: serviceName};
-      console.log('SERVICIO DESPUES', updatedService);
-      updateService(updatedService);
-      setIsInputActive(false);   
+     
+      // actuaizar la lista 
+      if(updateService !== service){
+        console.log('SERVICIO DESPUES', updatedService);
+        updateService(updatedService);
+        
+
+      }
+      setIsInputActive(false); 
+      
     }
   };
   return (
@@ -41,7 +48,7 @@ const ServiceCard= ({service, handleDelete, updateService}) => {
           {auth.role === 'admin' && (
             <ButtonGroup>
                     
-              <IconButton onClick={() =>  handleEdit()} color="white" bg="yellow.300" icon={<ImPencil2 /> }/>
+              <IconButton onClick={handleEdit} color="white" bg="yellow.300" icon={<ImPencil2 /> }/>
               <IconButton onClick={() => handleDelete(service.id)} color="white" bg="red.600" icon={<DeleteIcon/> }/>
                     
             </ButtonGroup>           
@@ -49,11 +56,6 @@ const ServiceCard= ({service, handleDelete, updateService}) => {
 
         </Flex>
       </Flex>
-      {/* <Flex justifyContent="space-between" mt={3}>
-        <p>{service.NameService}</p>
-        <p>{service.usuario}</p>
-      </Flex> */}
-
     </Card>
   );
 };
