@@ -1,13 +1,13 @@
-import React from 'react'
+import React from 'react';
 import Menu from '../layout/Menu';
 
 export const About = () => {
   return (
     <>
-    <Menu/>
+      <Menu/>
       <div>About</div>
     </>
-  )
+  );
   
-}
+};
 export default About;
