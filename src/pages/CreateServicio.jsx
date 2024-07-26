@@ -35,6 +35,7 @@ export const CreateServicio = () => {
 
   const toast = useToast();
 
+ 
   const handleNewCategoria = async (e)=>{
     e.preventDefault();
     try {
@@ -51,7 +52,6 @@ export const CreateServicio = () => {
       console.log('datos ',data);
 
       setNewCategorias(newCategorias.concat(data));
-     
       setNameService(''); 
 
 
@@ -60,7 +60,7 @@ export const CreateServicio = () => {
         position:'top',
         title: 'Error',
         status: 'error',
-        // description: error.response.data.error,
+        description: error.response.data.error,
         duration: 9000,
         isClosable: true,
       });
@@ -165,7 +165,6 @@ export const CreateServicio = () => {
                   placeholder="Nombre del Servicio" 
                   value={NameService}
                   onChange={handleNameInput}
-                  contentEditable="true"
                 />
               </FormControl>
               <ButtonGroup>
@@ -191,12 +190,6 @@ export const CreateServicio = () => {
 
       </Card>
       {/* añadiendo servicios */}
-      {/* Cómo renderizar matrices en React
-        El mensaje de error indica que estás intentando representar un 
-        objeto como hijo en un componente de React, lo cual no es válido. En su caso, 
-        el error ocurre cuando asigna la matriz newCategorias y pasa el objeto cat directamente 
-        al componente ServiceCard
-      */}
       <List>
         {/* {newCategorias.map((service) => (
          
