@@ -1,9 +1,10 @@
 
 import { Route, Routes } from 'react-router-dom';
 
-import CreateServicio from '../pages/CreateServicio';
+import Servicio from '../pages/CreateServicio';
 import PersistAuth from '../components/PersistAuth';
-
+import Index from '../pages/Index';
+import { CreateEnfermero } from '../pages/CreateEnfermero';
 
 
 
@@ -16,18 +17,19 @@ export const Root = () => {
     <>
     
       <Routes>
-      <Route element={<PersistAuth />}>
-
-          <Route path='/dashboard' element={<CreateServicio/>}/>
+        <Route element={<PersistAuth />}>
+          <Route path='/dashboard' element={<Index/>}/>
+          <Route path='/servicio' element={<Servicio/>}/>
           {/* <Route path='/CreateServicio' element={<CreateServicio/>}/>  */}
+          <Route  path='/enfermero' element={<CreateEnfermero/>}/>
         </Route>
       </Routes>
 
     </>
 
 
-  )
+  );
 
-}
+};
 
 export default Root;
