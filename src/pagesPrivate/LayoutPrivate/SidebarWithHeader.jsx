@@ -31,20 +31,21 @@ import {
   FiMenu,
   FiBell,
   FiChevronDown,
-  FiServer,
+  
 } from 'react-icons/fi';
 import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
+import { IoIosPersonAdd } from 'react-icons/io';
 
 // menu lateral
 const LinkItems = [
-  { name: 'Home', icon: FiHome },
-  { name: 'Services', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
+  { name: 'Home', icon: FiHome,to:'/dashboard' },
+  { name: 'Servicio', icon: FiTrendingUp ,to:'/servicio'},
+  { name: 'Citas', icon: FiCompass },
   { name: 'Favourites', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
-  { name: 'PERRO', icon: FiServer, to: '/eeeee'},
+  { name: 'Enfermero', icon: IoIosPersonAdd, to: '/enfermero'},
  
 ];
 
