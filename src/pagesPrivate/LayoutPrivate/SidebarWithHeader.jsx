@@ -37,15 +37,16 @@ import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
 import { IoIosPersonAdd } from 'react-icons/io';
+import { FcFile } from 'react-icons/fc';
 
 // menu lateral
 const LinkItems = [
   { name: 'Home', icon: FiHome,to:'/dashboard' },
   { name: 'Servicio', icon: FiTrendingUp ,to:'/servicio'},
-  { name: 'Citas', icon: FiCompass },
+  { name: 'Enfermero', icon: IoIosPersonAdd, to: '/enfermero'},
+  { name: 'Citas', icon: FcFile, to:'/cita' },
   { name: 'Favourites', icon: FiStar },
   { name: 'Settings', icon: FiSettings },
-  { name: 'Enfermero', icon: IoIosPersonAdd, to: '/enfermero'},
  
 ];
 
