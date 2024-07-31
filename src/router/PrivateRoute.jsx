@@ -5,7 +5,8 @@ import Servicio from '../pages/CreateServicio';
 import PersistAuth from '../components/PersistAuth';
 import Index from '../pages/Index';
 import { CreateEnfermero } from '../pages/CreateEnfermero';
-
+import SelectServicio from '../pages/SelectServicio';
+import Appointment from '../pages/Appointment';
 
 
 
@@ -22,6 +23,7 @@ export const Root = () => {
           <Route path='/servicio' element={<Servicio/>}/>
           {/* <Route path='/CreateServicio' element={<CreateServicio/>}/>  */}
           <Route  path='/enfermero' element={<CreateEnfermero/>}/>
+          <Route path='/cita' element={<Appointment/>}/>
         </Route>
       </Routes>
 
