@@ -3,7 +3,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from '../hooks/useAuth';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Spinner } from "@chakra-ui/react";
+import { Card, Center, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 
 const PersistAuth = () => {
   const location = useLocation();
@@ -30,7 +30,8 @@ const PersistAuth = () => {
 
   //CUANDO CARGARDO EL USUARIO
   if (isLoading) {
-    return <div><Spinner  size='md' color="red.600"/> cargandoo!</div>;
+    return <Center margin="5rem" flexDirection="column"> <Card padding="2rem 5rem" background="gray.500" > <Heading> Cargando</Heading><Flex justify="center" mt="1rem"><Text> Aguarde unos  Minutos !</Text><Spinner size='md' color="red.600"/></Flex> </Card></Center>;
+ 
   }
 
   //cuando estoy en home
