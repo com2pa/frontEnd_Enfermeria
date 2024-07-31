@@ -53,13 +53,12 @@ export const CreateEnfermero=()=>{
      
       // agregar los nombre a la lista 
       setNewNurse([...newNurse,data]);
-      // console.log(newNurse);
+      
+
       // limpiar el input      
       setName(''); 
-     
-      console.log(newNurse,'sss');
-      setName('');
-      
+      // setService('');
+           
     } catch (error) {
       console.log(error); 
       toast({
@@ -77,8 +76,11 @@ export const CreateEnfermero=()=>{
   const handleEditNurse = async(handleEditNurse)=>{
     const id= handleEditNurse._id;
     const name = handleEditNurse.name;
+    const service = handleEditNurse.service;
+    
+    // console.log('...',handleEditNurse);
     try {
-      const {data} = await axios.put(`/api/nurse/${id}`,{name});
+      const {data} = await axios.put(`/api/nurse/${id}`,{name ,service});
       console.log('editado! ',data);
       toast({
         position:'top',
@@ -89,14 +91,22 @@ export const CreateEnfermero=()=>{
         isClosable:true,
       });
       // actualizar la lista
-      const updatedNurses = newNurse.map(nurse=>nurse._id === id? data : nurse);
-      setNewNurse(updatedNurses);
+      // const updatedNurses = newNurse.map(nurse=>nurse._id === id ? data : nurse);
+      const updatedServices = newNurse.map(nurse=>nurse._id === id? {...nurse, services:[...nurse.services, handleEditNurse.service]} : nurse);
+      // setNewNurse(updatedNurses);
+      // agregar servicio en service
+      // if(handleEditNurse.service!== handleEditNurse.service){
+      //   // actualizar la lista de servicios
+      setNewNurse(updatedServices);
+      // }
+      
+
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       toast({
         position:'top',
         title: 'Error',
-        description: error.response.data.error,
+        // description: error.response.data.error,
         status:'error',
         duration:4000,
         isClosable:true,
@@ -104,6 +114,7 @@ export const CreateEnfermero=()=>{
     }
     // limpiar el input
     setName('');
+    // setService('');
   };
 
 
