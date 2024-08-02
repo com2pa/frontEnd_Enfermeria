@@ -44,6 +44,7 @@ const CONFETTI_DARK = `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2
 const REGEX_EMAIL=/[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
 const REGEX_NAME = /^[A-Z][a-z]*[ ][A-Z][a-z]*$/;
 const REGEX_NUMBER = /^[0](212|412|414|424|416|426)[0-9]{7}$/;
+const REGEX_TIME =/^(0[8-9]|1[0-9]|2[0-1]):[0-5][0-9]$/;
 
 export default function ContactFormWithSocialButtons() {
   const { hasCopied, onCopy } = useClipboard();
@@ -56,23 +57,58 @@ export default function ContactFormWithSocialButtons() {
 
   const[phone,setPhone]= useState('');
   const[phoneValidation, setPhoneValidation]= useState(false);
+  
+  const[time,setTime]=useState('');
+  const[timeValidation, setTimeValidation]= useState(false);
 
   const[age, setAge]= useState(' ');
   const[address ,setAddress]= useState(' ');
   const[description, setDescription]= useState(' ');
   const[date, setDate]=useState('');
+
   const[serviceSelected, setServiceSelected]=useState('');
   
   const[services , setServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   // console.log(services);
 
+  // estado para registro de paciente
+  // const [canRegister, setCanRegister] = useState(false);
+
+
+
   const toast = useToast();
 
- 
+  // useEffect(()=>{
+
+  //   const currentDate = new Date();
+  //   // const minDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() - 365);
+  //   const currentDay = currentDate.getDate(); //0 = lunes  , 1= martes .. 7 =domingo
+  //   const currentHour = currentDate.getHours();
+    
+  //   // valida los dias y horas para que el paciente se registre
+  //   const validDays =[1,2,3,4,5,6,7];
+  //   const validHours ={
+  //     start: 8, // 8am
+  //     end: 17, //5pm
+  //   };
+  //   // chequea si los dias y horas 
+  //   if (validDays.includes(currentDay) && currentHour >= validHours.start && currentHour <= validHours.end) {
+  //     setCanRegister(true);
+  //   } else {
+  //     setCanRegister(false);
+  //   }
+  // }, []); 
+  
+  
+  
+  
 
   // obtner todos los servicios creado 
   // Recuperar servicios en el montaje del componente para completar el menú desplegable
+  
+  
+  
   useEffect(() => {
     const fetchServices = async () => {
   
@@ -114,13 +150,16 @@ export default function ContactFormWithSocialButtons() {
   const handleDateInput=({target})=>{
     setDate(target.value);
   };
+  const handleTimeInput=({target})=>{
+    setTime(target.value);
+  };
  
 
   const handleNewPatient = async()=>{
     setIsLoading(true);
     try {
       console.log(1);
-      const{data}=await axios.post('/api/patient',{name, email, phone, age, address, description,date,serviceSelected});
+      const{data}=await axios.post('/api/patient',{name, email, phone, age, address, description,date,time,serviceSelected});
         
       toast({
         position:'top',
@@ -146,7 +185,17 @@ export default function ContactFormWithSocialButtons() {
       console.log(error);
 
     }
-    
+    // limpiar input
+    setName('');
+    setEmail('');
+    setPhone('');
+    setAge('');
+    setAddress('');
+    setDescription('');
+    setDate('');
+    setTime('');
+    setServiceSelected('');
+
 
   };
   useEffect(()=>{
@@ -159,6 +208,9 @@ export default function ContactFormWithSocialButtons() {
   useEffect(()=>{
     setPhoneValidation(REGEX_NUMBER.test(phone));
   },[phone]);
+  useEffect(()=>{
+    setTimeValidation(REGEX_TIME.test(time));
+  },[time]);
     
   return (
     <>
@@ -316,6 +368,19 @@ export default function ContactFormWithSocialButtons() {
                         <Input type="date" size="sm" onChange={handleDateInput} value={date}/>
                       </InputGroup>
                     </FormControl>
+                    <FormControl isRequired isInvalid={!timeValidation && time}>
+                      
+                      <FormLabel>Hora</FormLabel>
+
+
+                      <InputGroup borderColor="#E0E1E7">
+                        <InputLeftElement pointerEvents="none">
+                          <MdOutlineCalendarToday color="gray.800" />
+                        </InputLeftElement>
+                        <Input type="time" size="sm" onChange={handleTimeInput} value={time} />
+                      </InputGroup>
+                    </FormControl>
+                    
 
                     <FormControl isRequired>
                       <FormLabel>Domicilio</FormLabel>
@@ -365,7 +430,7 @@ export default function ContactFormWithSocialButtons() {
                       onClick={handleNewPatient}
                       isDisabled={!phoneValidation || !nameValidation || !emailValidation }
                     >
-                    Send Message
+                    Crear Cita
                     </Button>
                   </VStack>
                 </Box>
