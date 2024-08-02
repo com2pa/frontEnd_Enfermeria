@@ -23,11 +23,7 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import {
-  FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiSettings,
+  FiHome,  
   FiMenu,
   FiBell,
   FiChevronDown,
@@ -38,16 +34,15 @@ import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
 import { IoIosPersonAdd } from 'react-icons/io';
 import { FcFile } from 'react-icons/fc';
+import { MdMedicalServices } from 'react-icons/md';
 
 // menu lateral
 const LinkItems = [
   { name: 'Home', icon: FiHome,to:'/dashboard' },
-  { name: 'Servicio', icon: FiTrendingUp ,to:'/servicio'},
+  { name: 'Servicio', icon: MdMedicalServices  ,to:'/servicio'},
   { name: 'Enfermero', icon: IoIosPersonAdd, to: '/enfermero'},
   { name: 'Citas', icon: FcFile, to:'/cita' },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
- 
+  
 ];
 
 const SidebarContent = ({ onClose, ...rest }) => {
