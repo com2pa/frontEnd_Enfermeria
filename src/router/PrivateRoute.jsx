@@ -5,7 +5,6 @@ import Servicio from '../pages/CreateServicio';
 import PersistAuth from '../components/PersistAuth';
 import Index from '../pages/Index';
 import { CreateEnfermero } from '../pages/CreateEnfermero';
-import SelectServicio from '../pages/SelectServicio';
 import Appointment from '../pages/Appointment';
 
 
