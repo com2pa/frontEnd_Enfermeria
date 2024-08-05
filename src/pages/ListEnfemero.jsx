@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Card, Divider, Flex, HStack, IconButton, Input, Popover, PopoverBody, PopoverContent, PopoverTrigger, Radio, RadioGroup,  Text,  useBoolean, useToast } from "@chakra-ui/react";
+import { Button, ButtonGroup, Card, Divider, Flex, HStack, IconButton, Input, Popover, PopoverBody, PopoverContent, PopoverTrigger, Select,  Text,  useBoolean,  useToast } from "@chakra-ui/react";
 import { useAuth } from "../hooks/useAuth";
 import { ImPencil2 } from "react-icons/im";
 import { DeleteIcon } from "@chakra-ui/icons";
@@ -13,8 +13,8 @@ export const ListEnfermero =({nurse,  handleEditNurse, handleDeleteNurse })=>{
   const [isInputActive, setIsInputActive]= useState(false);
   const [isEditing , SetIsEditing] = useBoolean();
   const [services, setServices] = useState([]);
-  const [selectedServiceId, setSelectedServiceId] = useState(nurse.serviceId);
-
+  const [selectedService, setSelectedService] = useState('');
+  // const [onClose] =useDisclosure();
   // 
   const[name, setName]=useState(nurse.name);
   
@@ -36,42 +36,41 @@ export const ListEnfermero =({nurse,  handleEditNurse, handleDeleteNurse })=>{
   }, [setServices]);
 
 
-  const handleServiceChange = (serviceId) => {
-    setSelectedServiceId(serviceId);
-    // console.log(serviceId,'....');
+  // selecciona el servicio seleccionado
+  const handleServiceChange = (e) => {
+    setSelectedService(e.target.value);
+    console.log(e.target.value,'....');
   };
-  // guardar los servicio creado
-  const handleSave = async () => {
-    const updatedData = {
-      _id: nurse._id,
-      service: selectedServiceId,
-      // serviceName: services.find((service) => service.id === selectedServiceId)?.NameService,
-    };
-    console.log(updatedData._id);
-    console.log(updatedData.service);
-    // const updatedNurse = { ...nurse, serviceId: selectedServiceId };
-    // const updatedServiceId = selectedServiceId;
-    handleEditNurse(updatedData);
-    console.log('datos a enviar 1', updatedData);
-    
+
+  const handleSave = async ()=> {  
+    // const selectedServiceObj = services.find(service => service.id === selectedService);
+
+    // const updatedData = {
+    //   // _id: nurse._id,
+    //   services: selectedService,     
+          
+    // };
+    // console.log('77777',updatedData.services);
+    // console.log('datos a enviar', nurse._id,updatedData);
+    // const selectedServiceName = services.find(service => service.id === selectedService)?.NameService;    
+    console.log(1);
+    const updatedNurse ={...nurse, services: selectedService};
+    console.log(updatedNurse);
     try {
-      console.log(3);
-      // const {data} = await axios.put(`/api/nurse/${nurse._id}`, {service:updatedNurse});
-      const {data} = await axios.put(`/api/nurse/${updatedData._id}`,updatedData);
-      handleEditNurse(data);
-      // console.log(data);
-      
+      const {data} = await axios.patch(`/api/nurse/${nurse._id}`,updatedNurse);    
+      console.log(' enviados ..',data);
+      // handleEditNurse(updatedNurse);
       SetIsEditing.off();
       toast({
         position:'top',
         title: 'Success',
-        description: 'servicio actualizado : ',data, 
+        // description: data, 
         status:'success',
         duration:4000,
         isClosable:true,
       });
     } catch (error) {
-      console.error('Error actualizacion del  nurse:', error);
+      console.log(error);
       toast({
         position:'top',
         title: 'Error seleccionado el servicio',
@@ -172,8 +171,8 @@ export const ListEnfermero =({nurse,  handleEditNurse, handleDeleteNurse })=>{
                     <Text as='b'> Seleccione el servicio del Enfermero </Text>
                   </Flex>
                   <Divider  borderColor="red" pt={2}/>
-                  <RadioGroup 
-                    value={selectedServiceId} 
+                  {/* <RadioGroup 
+                    value={selectedService} 
                     onChange={handleServiceChange}
                     name="service"
                     gap={5}
@@ -186,8 +185,8 @@ export const ListEnfermero =({nurse,  handleEditNurse, handleDeleteNurse })=>{
                         value={service.id}
                         color="red"
                         size="md"
-                        // isChecked={selectedServiceId === service.id} 
-                        // label={service.name}
+                        isChecked={selectedService === service.id} 
+                        label={service.name}
                         gap={5}
                         borderColor="red" 
                       >
@@ -195,13 +194,33 @@ export const ListEnfermero =({nurse,  handleEditNurse, handleDeleteNurse })=>{
                         {service.NameService}
                       </Radio>
                     ))}
-                  </RadioGroup>
+                  </RadioGroup> */}
+                  <Select
+                    value={selectedService}
+                    onChange={handleServiceChange}                    
+                    placeholder="Seleccione opcion para el enfermero"
+                    color="black"
+                    fontSize="14px"
+                    fontWeight="semibold"
+                    border="1px solid black"
+                    borderColor="green.600"
+                    borderRadius="5px"
+                    mt={5}
+                  >
+                    {services.map((service) => (
+                      <option key={service.id} value={service.id}>
+                        {service.NameService}
+                      </option>
+                    ))}
+                  </Select>
                   <Flex justifyContent="center"> 
 
                     <Button 
-                      onClick={handleSave} 
+                      onClick={()=>handleSave(nurse._id)} 
                       bg="green.300"
                       color="white"
+                      mt={5}
+                      
                     >Guardar</Button>
                   </Flex>
                 </PopoverBody>

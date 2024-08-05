@@ -407,7 +407,7 @@ export default function ContactFormWithSocialButtons() {
                     </FormControl>
 
                     <FormControl isRequired>
-                      <FormLabel>Message</FormLabel>
+                      <FormLabel>Mensaje </FormLabel>
 
                       <Textarea
                         name="message"

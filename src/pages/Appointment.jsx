@@ -6,7 +6,6 @@ import {
   ButtonGroup, 
   Card, 
   Heading, 
-  HStack, 
   IconButton, 
   // Input, 
   Modal, 
@@ -181,19 +180,6 @@ const Cita = () =>{
           <ModalHeader>Detalle de la cita</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}>           
-            {/* {
-              patients.map((patient)=>{
-                return(
-                  <Card key={patient.id} p={5} borderLeft="2px" borderLeftColor="red.600">
-                    <p >Dirección:<span> {patient.address}</span></p>
-                    <p>Telefono: <span> {patient.phone}</span></p>
-                    <p>Edad: <span> {patient.age}</span></p>
-                    <p>correo: <span> {patient.email}</span></p>
-                    <p>Sintoma: <span> {patient.description}</span></p>
-                  </Card>
-                );
-              })
-            } */}
             {selectedPatient && (
               <Card p={5} borderLeft="2px" borderLeftColor="red.600">                
                 <p>Status: <span>{selectedPatient.status}</span></p>
