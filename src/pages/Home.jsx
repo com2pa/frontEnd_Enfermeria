@@ -1,11 +1,10 @@
 // import {Norsing} from '../assets/Enfermera.jpg'
 import { EmailIcon, PhoneIcon } from "@chakra-ui/icons";
-import { Box, Button, Card,  Flex, FormControl, FormLabel, Heading,    Image,    Input,   InputGroup,   InputLeftElement,    Select,   Text, Textarea, VStack,  } from "@chakra-ui/react";
-import {  BsPerson } from "react-icons/bs";
-import {  MdLocationOn, MdOutlineCalendarToday, MdOutlineEmail, MdPhone } from "react-icons/md";
+import { Box, Button, Card,  Flex,  Heading,    Image,    Text,  } from "@chakra-ui/react";
 import Enfermera from '../assets/Enfermera.jpg';
 import Menu from "../layout/Menu";
 import Footer from "../layout/Footer";
+import Calendary  from "./Calendary";
 
 
 export const Home = () => {
@@ -44,8 +43,8 @@ export const Home = () => {
       {/* seccion 2 */}
       <Box h="100vh" mt={5} >
         <Flex gap="1rem"  >
-          <Card bg="red.600"  w="50%" h="100vh" border="1px solid red.100">
-            {/* <calendary/> */}
+          <Card   w="50%" h="100vh" border="1px solid red.100">
+            <Calendary/>
           </Card>
           <Card  w="50%" h="100vh" border="1px solid red.100" display="flex" justifyContent="center" alignItems="center">
             <Heading color="red.600" fontSize={50} display="flex" mb={2} justifyContent="center"  >¡ Pide tu cita aqui !</Heading>
