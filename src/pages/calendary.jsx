@@ -1,47 +1,64 @@
-import { Button, HStack, Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from '@fullcalendar/daygrid';
+import { Flex, Heading } from "@chakra-ui/react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
+export const Calendary = () => {
+  const [appointments, setAppointments] = useState([]);
 
-export const calendary = () => {
-   
-  const { headers, body, month, year, navigation } = useCalendar({
-    defaultViewType: CalendarViewType.Week
-  });
-   
-  return (
-    <>
+ 
+  useEffect(() => {
+    const Fechas= async ()=>{
+
+      try {
+        const {data} = await axios.get('/api/patient/');
+        console.log(data);      
         
-      <HStack justify="space-between">
-        <HStack>
-          <Button onClick={navigation.toPrev}>&lt;</Button>
-          <Text>{format(new Date(year, month), "MMM yyyy")}</Text>
-          <Button onClick={navigation.toNext}>&gt;</Button>
-        </HStack>
-        <Button onClick={navigation.setToday}>Today</Button>
-      </HStack>
-      <Table>
-        <Thead>
-          <Tr>
-            {headers.weekDays.map(({ key, value }) => {
-              return <Th key={key}>{format(value, "E")}</Th>;
-            })}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {body.value.map(({ key, value: days }) => (
-            <Tr key={key}>
-              {days.map(({ key, value }) => (
-                <Td key={key} color={isToday(value) ? "red.500" : "inherit"}>
-                  {getDate(value)}
-                </Td>
-              ))}
-            </Tr>
-          ))}
-        </Tbody>
-      </Table>
-    </>
-
-  );
+        // Aquí podrías añadir más opciones a las citas, como la descripción
+        const citasPacientes = data.map(patient => ({
+          title:patient.name,
+          date: patient.date,
+          time:patient.time
+          
+        }));
+        
+        setAppointments(citasPacientes);
   
-};
+      } catch (error) {
+        console.log(error);
+      }
+  
+    };
+    Fechas();
+  }, [setAppointments]);
 
-export default calendary;
+  return (
+    // Ajustar los parámetros a tu necesidad
+    <>
+      <Flex  
+        justifyContent="center" 
+        m={10}
+        align="center" 
+        p={10}
+        color="red.600"
+      >
+        <Heading>Nuestras citas activas</Heading>
+      </Flex>
+      <FullCalendar
+        // localizer
+        height="400px"
+        width="100%"
+        // editable={true}
+        dayMaxEvents:true //permite saber por un link si hay mas eventos
+        // dayMinWidth="50px"
+        plugins={[ dayGridPlugin ]}
+        initialView="dayGridMonth"
+        // weekends={false}
+        events={{appointments}}
+      />
+  
+    </>
+  );
+};
+export default Calendary;
