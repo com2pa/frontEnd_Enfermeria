@@ -10,7 +10,7 @@ import RegisterFrom from '../pages/Login/RegisterForm';
 import LoginForm from '../pages/Login/LoginForm';
 import Verify from '../pages/verify';
 import PersistAuth from '../components/PersistAuth';
-
+import Calendary from '../pages/Calendary';
 
 export const Root = () => {
   return (
@@ -26,6 +26,8 @@ export const Root = () => {
         <Route path='/register' element={<RegisterFrom />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/verify/:id/:token' element={<Verify />} />
+        <Route path='/calendary' element={<Calendary/>}/>
+        
       </Routes>
 
     </>
