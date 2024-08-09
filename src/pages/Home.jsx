@@ -5,66 +5,67 @@ import Enfermera from '../assets/Enfermera.jpg';
 import Menu from "../layout/Menu";
 import Footer from "../layout/Footer";
 import Calendary  from "./Calendary";
+import { useNavigate } from "react-router-dom";
 
 
 export const Home = () => {
+  const navigate = useNavigate();
+  const navToPage=(url)=>{
+    navigate(url);
+  };
+  
   return (
     
     
     <>
-      <Menu/>
-      {/* seccion 1 */}
-      <Flex flexDir="row">
-        <Box  h="83vh" >    
-          <Flex >
-            <Card  w="40%" h="83vh" textAlign="justify" justifyContent="center"padding="0 1rem " boxShadow='dark-lg'>
-              <Flex flexDir="column" alignContent="center"  gap="3rem">
-                <Text color="red.600" fontSize={45} fontWeight="600">
+      <Flex flexDir="column" gap={8} p={8} maxW="90rem" mx="auto">
+        <Menu />
+        {/* seccion 1 */}
+        <Flex gap={4} flexDir={{ base: 'column', md: 'row', }}>
+          <Card variant="outline" w="100%" textAlign="justify" justifyContent="center">
+            <Flex flexDir="column" alignContent="center"p={4}  gap="3rem">
+              <Text color="red.600" fontSize={{ base: 25, md: 45}} fontWeight="600">
                 Enfermería en Casa
-                </Text>
-                <Text fontSize={20}>
+              </Text>
+              <Text fontSize={{ base: 15, md: 20 }}>
                 ¡ Servicio de enfermeria en casa atencion post operatorio, cuidados al adulto mayor
                 con profesionales entrenados, comprometidos con su salud  el bienes del paciente !
-                </Text>
+              </Text>
                 
-                <Text>
+              <Text  fontSize={{ base: 15, md: 20 }}>
                 ¿Necesitas ayuda? Contactanos al  <span> <PhoneIcon color="red.600"/>  01800-123-4567 </span>
                 o al correo <EmailIcon color="red.600" /> Com2pa@gmail.com             
-                </Text>            
-              </Flex>
-            </Card>
-            <Box boxSize='60%'>
-              <Image src={Enfermera} alt="cerrar-equipo-listo-trabajar" h="100vh" w="100%"  />
-            </Box>
-          </Flex>
-        </Box>
-      
-      </Flex>
-      {/* seccion 2 */}
-      <Box h="100vh" mt={5} >
-        <Flex gap="1rem"  >
-          <Card   w="50%" h="100vh" border="1px solid red.100">
-            <Calendary/>
+              </Text>            
+            </Flex>
           </Card>
-          <Card  w="50%" h="100vh" border="1px solid red.100" display="flex" justifyContent="center" alignItems="center">
-            <Heading color="red.600" fontSize={50} display="flex" mb={2} justifyContent="center"  >¡ Pide tu cita aqui !</Heading>
-            <Text fontSize={29} mt={5}> has click aqui para ir a solicitar tu cita ! </Text>
-            <Button 
-              mt={10} 
-              bg="red.600" 
-              color="white" 
-              fontSize={30} 
-              p={30}  
-              boxShadow='dark-lg'
-              href="/contact" 
-              target="_blank"> oprimas aqui !</Button>
-            
+          <Card variant="outline" width="100%" height="30rem" display={{base: 'none', md: 'block'}}>
+            <Image src={Enfermera} alt="cerrar-equipo-listo-trabajar" height="100%" objectFit="cover" w="100%"  />
           </Card>
         </Flex>
-      </Box>
-      {/* seccion 3 */}
-
-      <Footer/>
+        {/* seccion 2 */}
+        <Box >
+          <Flex gap="1rem" flexDir={{base: 'column', md: 'row'}}  >
+            <Flex flexDir={{ base: "column", md: 'row'}}  w="100%" gap={4} align="center">
+              <Card p={4} display="flex" variant="outline" w="100%" height="100%" flexDir="column" gap={4} justifyContent="center">
+                <Heading>Nuestras citas activas</Heading>
+                <Button 
+                  bg="red.600" 
+                  color="white"
+                  size={{ base: 'md', md: 'lg' }}
+                  boxShadow='dark-lg'
+                  href="/contact" 
+                  target="_blank"
+                  onClick={()=>navToPage('/Contact')}
+                > Pide tu cita!</Button>
+              </Card>
+              <Card display="flex" variant="outline" p={4} align="center" w="100%" justifyContent="center">
+                <Calendary/>
+              </Card>
+            </Flex>
+          </Flex>
+        </Box>
+        <Footer />
+      </Flex>
     </>
     
     
