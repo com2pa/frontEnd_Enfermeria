@@ -55,66 +55,20 @@ const SocialButton = ({
 
 export default function SmallCentered() {
   return (
-    <Box
-      bg={useColorModeValue('red.600', 'red.300')}
-      color={useColorModeValue('white', 'white')}
-      bottom={0}  
-    >
-
-      <Container
-        as={Stack}
-        maxW={'6xl'}
-        py={4}
-        spacing={4}
-        justify={'center'}
-        align={'center'}>
-        <Logo />
-        <Stack direction={'row'} spacing={6}>
-          <Box as={ReactRouterLink} to='/home'>
-            Home
-          </Box>
-          <Box as={ReactRouterLink} to='/about'>
-            About
-          </Box>
-          <Box as={ReactRouterLink} to='/services'>
-            Services
-          </Box>
-          <Box as={ReactRouterLink} to='/contact'>
-            Contact
-          </Box>
-        </Stack>
-      </Container>
-
-      <Box
+      <Stack
         borderTopWidth={1}
         borderStyle={'solid'}
         // borderColor={useColorModeValue('gray.200', 'gray.700')}
         color={useColorModeValue('red.600', 'red.300')}
-        bg={useColorModeValue('white', 'White.300')}>
-        <Container
-          as={Stack}
-          maxW={'6xl'}
-          py={4}
-          direction={{ base: 'column', md: 'row' }}
-          spacing={4}
-          justify={{ base: 'center', md: 'space-between' }}
-          align={{ base: 'center', md: 'center' }}
-           
+        bg={useColorModeValue('white', 'White.300')}
+        py={4}
+        direction={{ base: 'column', md: 'row' }}
+        spacing={4}
+        justify={{ base: 'center', md: 'space-between' }}
+        align={{ base: 'center', md: 'center' }}
+        fontSize={{base:15,sm:20,md:20,lg:20,xl:30}}
         >
           <Text>© 2024 Ingeniero Merwil Vegas. Todos los derechos reservados </Text>
-          <Stack direction={'row'} spacing={6}>
-            {/* <SocialButton label={'Twitter'} href={'#'}>
-              <FaTwitter />
-            </SocialButton>
-            <SocialButton label={'YouTube'} href={'#'}>
-              <FaYoutube />
-            </SocialButton>
-            <SocialButton label={'Instagram'} href={'#'}>
-              <FaInstagram />
-            </SocialButton> */}
-          </Stack>
-        </Container>
-      </Box>
-    </Box>
+        </Stack>
   )
 }
