@@ -7,24 +7,25 @@ import {
   FormControl,
   FormLabel,
   Heading,
-  IconButton,
+  
   Input,
   InputGroup,
   InputLeftElement,
   Stack,
   Textarea,
-  Tooltip,
+  
   useClipboard,
   useColorModeValue,
   VStack,
   Select,
   useToast,
 } from '@chakra-ui/react';
-import { BsGithub, BsLinkedin, BsPerson, BsTwitter } from 'react-icons/bs';
-import { MdEmail, MdLocationOn, MdOutlineCalendarToday, MdOutlineEmail, MdPhone } from 'react-icons/md';
+import { BsPerson,  } from 'react-icons/bs';
+import {  MdLocationOn, MdOutlineCalendarToday, MdOutlineEmail, MdPhone } from 'react-icons/md';
 import Menu from '../layout/Menu';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Footer from '../layout/Footer';
 
 const confetti = {
   light: {
@@ -229,89 +230,28 @@ export default function ContactFormWithSocialButtons() {
             <VStack spacing={{ base: 4, md: 8, lg: 20 }}>
               <Heading
                 fontSize={{
-                  base: '4xl',
-                  md: '5xl',
+                  base: '25',
+                  sm:'25',
+                  md: '30',
+                  lg: '40',
+                  xl:'45'
+
                 }}>
-              Solicita tu cita aqui !
+                  Solicita tu cita aqui !
               </Heading>
 
               <Stack
                 spacing={{ base: 4, md: 8, lg: 20 }}
-                direction={{ base: 'column', md: 'row' }}>
-                <Stack
-                  align="center"
-                  justify="space-around"
-                  direction={{ base: 'row', md: 'column' }}>
-                  <Tooltip
-                    label={hasCopied ? 'Email Copied!' : 'Copy Email'}
-                    closeOnClick={false}
-                    hasArrow>
-                    <IconButton
-                      aria-label="email"
-                      variant="ghost"
-                      size="lg"
-                      fontSize="3xl"
-                      icon={<MdEmail />}
-                      _hover={{
-                        bg: 'blue.500',
-                        color: useColorModeValue('white', 'gray.700'),
-                      }}
-                      onClick={onCopy}
-                      isRound
-                    />
-                  </Tooltip>
-
-                  <Box as="a" href="#">
-                    <IconButton
-                      aria-label="github"
-                      variant="ghost"
-                      size="lg"
-                      fontSize="3xl"
-                      icon={<BsGithub />}
-                      _hover={{
-                        bg: 'blue.500',
-                        color: useColorModeValue('white', 'gray.700'),
-                      }}
-                      isRound
-                    />
-                  </Box>
-
-                  <Box as="a" href="#">
-                    <IconButton
-                      aria-label="twitter"
-                      variant="ghost"
-                      size="lg"
-                      icon={<BsTwitter size="28px" />}
-                      _hover={{
-                        bg: 'blue.500',
-                        color: useColorModeValue('white', 'gray.700'),
-                      }}
-                      isRound
-                    />
-                  </Box>
-
-                  <Box as="a" href="#">
-                    <IconButton
-                      aria-label="linkedin"
-                      variant="ghost"
-                      size="lg"
-                      icon={<BsLinkedin size="28px" />}
-                      _hover={{
-                        bg: 'blue.500',
-                        color: useColorModeValue('white', 'gray.700'),
-                      }}
-                      isRound
-                    />
-                  </Box>
-                </Stack>
+                direction={{ base: 'column', md: 'row' }}>              
 
                 <Box
                   bg={useColorModeValue('white', 'gray.700')}
                   borderRadius="lg"
+                  // maxW="lg"
                   p={8}
                   color={useColorModeValue('gray.700', 'whiteAlpha.900')}
                   shadow="base">
-                  <VStack spacing={5}>
+                  <VStack spacing={1} >
                     <FormControl isInvalid={!nameValidation && name} isRequired>
                       <FormLabel>Nombre y Apellido</FormLabel>
 
@@ -439,6 +379,7 @@ export default function ContactFormWithSocialButtons() {
           </Box>
         </Box>
       </Flex>
+      <Footer/>
     </>
   );
 }
