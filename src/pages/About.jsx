@@ -1,7 +1,7 @@
 import React from 'react';
 import Menu from '../layout/Menu';
 import {Card, Flex, Image, Text } from '@chakra-ui/react';
-import Enfermera from '../assets/Enfermera.jpg';
+import Somos from '../assets/team-ready-work.jpg';
 import Footer from '../layout/Footer';
 export const About = () => {
   return (
@@ -25,7 +25,7 @@ export const About = () => {
             </Flex>
           </Card>
           <Card variant="outline" width="100%" height="auto" display={{base: 'none', md: 'block'}}>
-            <Image src={Enfermera} alt="cerrar-equipo-listo-trabajar" height="100%" objectFit="cover" w="100%"  />
+            <Image src={Somos} alt="cerrar-equipo-listo-trabajar" height="100%" objectFit="cover" w="100%"  />
           </Card>
         </Flex>
         <Footer/>
