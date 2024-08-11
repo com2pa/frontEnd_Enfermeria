@@ -19,21 +19,23 @@ import {
   TableContainer, 
   Tbody, 
   Td, 
-  Tfoot, 
-  Th, 
+  
+  
   Thead, 
   Tr, 
   useDisclosure, 
   useToast
 } from "@chakra-ui/react";
-// import { ImPencil2 } from "react-icons/im";
+
 import { DeleteIcon } from "@chakra-ui/icons";
+import { useAuth } from "../hooks/useAuth";
 
 
 const Cita = () =>{
   const [patients, setPatients] = useState([]);  
   const {isOpen,onOpen,onClose} = useDisclosure();
   const [selectedPatient,setSelectedPatient]= useState(null);
+  const {auth}=useAuth();
 
 
   const toast = useToast();
@@ -82,8 +84,9 @@ const Cita = () =>{
       );
       console.log(data);
       console.log(updatePatients);
+      setPatients(updatePatients);
       toast({
-        title: 'Éxito',
+        title: 'Info',
         description: 'El estado de la cita ha sido actualizado',data,
         status: 'success',
         // duration: 5000,
@@ -101,76 +104,116 @@ const Cita = () =>{
     }
     
   };
+ 
   return (
     <>
       <SidebarWithHeader>
         <Heading mb={5}> Citas</Heading>
         <TableContainer>
-          <Table size='sm'  variant='striped' colorScheme='red'>
-            <Thead >
-              <Tr>
-                <th>Nombre y Apellido</th>
-                
-                <th>Servicio </th>            
-                <th>fecha</th>
-                <th>Hora</th>
-                <th>Status</th>                           
-              </Tr>
-            </Thead>
-            <Tbody>
-              {patients.map((patient) => (
-                <Tr key={patient.id}>
-                  <Td value={patient.id}>{patient.name}</Td>               
-                  <td>{patient.services}</td>               
-                  <Td>{patient.date}</Td>
-                  <Td>{patient.time}</Td>
-                  <Td>
-                    <ButtonGroup>                      
-                      {/* <IconButton 
-                        // onClick={handleEdit} 
-                        color="white" 
-                        bg="yellow.300" 
-                        icon={<ImPencil2 /> }
-                      /> */}
-                      <Button
-                        onClick={() => handleStatus(patient.id, 'espera')}
-                        disabled={patient.status === 'espera'}
-                        bg={patient.status === 'espera' ?'blue.500'  : 'white' }
-                      >
-                        espera
-                      </Button>
-                      <Button
-                        onClick={() => handleStatus(patient.id, 'finalizado')}
-                        disabled={patient.status === 'finalizado'}
-                        bg={patient.status === 'espera' ? 'blue.500' : 'white'}
-                      >
-                        Finalizado
-                      </Button>
+          <Table 
+            size='sm'  
+            // variant='striped' 
+            colorScheme='red'>
 
-                      
-                      <IconButton 
-                        onClick={()=>handleDelete(patient.id)} 
-                        color="white" bg="red.600" 
-                        icon={<DeleteIcon/> }
-                      /> 
-                      <Button bg="blue" onClick={() => {
-                        onOpen();
-                        setSelectedPatient(patient);
-                      }}>
-                          Ver Detalles
-                      </Button>
-                    </ButtonGroup>  
-                  
-                  </Td>               
+            <>
+              <Thead>
+                <Tr>
+                  <th>Nombre y Apellido</th>
+                  <th>Servicio </th>
+                  <th>fecha</th>
+                  <th>Hora</th>
+                  <th>Status</th>
+                   
                 </Tr>
-              ))}    
-            
-            </Tbody>
-            <Tfoot>
-              <Tr colSpan="5" >
-                <Th rowSpan={5} display="flex" justifyContent="center">To convert</Th>        
-              </Tr>
-            </Tfoot>
+              </Thead>
+              <Tbody>
+              
+
+                {patients.map((patient) => (
+                  <Tr key={patient.id}>
+                    <Td value={patient.id}>{patient.name}</Td>
+                    <td>{patient.services.NameService}</td>
+                    <Td>{patient.date[0].split('T')[0]}</Td>
+                    <Td>{patient.time}</Td>
+                    
+                    <Td>
+                      <ButtonGroup>
+                        {auth.role ==='enfermero' && (
+                          <>
+                            <Button
+                              onClick={() => handleStatus(patient.id, 'espera')}                              
+                              disabled={patient.status === 'espera' }
+                              bg={patient.status === 'espera' ? 'yellow.300' : 'white'}
+
+                            >
+                            espera
+                            </Button>
+                            <Button
+                              onClick={() => handleStatus(patient.id, 'finalizado')}
+                              disabled={patient.status === 'finalizado'}
+                              bg={patient.status === 'finalizado' ? 'green.300' : 'white'}
+                            >
+                            Finalizado
+                            </Button>
+                            <Button bg="blue" onClick={() => {
+                              onOpen();
+                              setSelectedPatient(patient);
+                            } }>
+                            Ver Detalles
+                            </Button>
+                            
+                        
+                          </>
+                        )}   
+                     
+                        {auth.role ==='admin' && (
+                          <>
+                            <Button
+                              onClick={() => handleStatus(patient.id, 'espera')}                              
+                              disabled={patient.status === 'espera' }
+                              bg={patient.status === 'espera' ? 'yellow.300' : 'white'}
+
+                            >
+                            espera
+                            </Button>
+                            <Button
+                              onClick={() => handleStatus(patient.id, 'finalizado')}
+                              disabled={patient.status === 'finalizado'}
+                              bg={patient.status === 'finalizado' ? 'green.300' : 'white'}
+                            >
+                            Finalizado
+                            </Button>
+                            <Button bg="blue" onClick={() => {
+                              onOpen();
+                              setSelectedPatient(patient);
+                            } }>
+                            Ver Detalles
+                            </Button>
+                           
+                            
+                        
+                          </>
+                        )}   
+                        
+                        {auth.role ==='admin' &&(
+                          <>
+                            <IconButton
+                              onClick={() => handleDelete(patient.id)}
+                              color="white" bg="red.600"
+                              icon={<DeleteIcon />} />
+                          </>
+                        
+                        )}
+                      </ButtonGroup>
+
+
+                    </Td>
+                  </Tr>
+                ))}
+               
+
+              </Tbody>
+            </>
           </Table>
         </TableContainer>     
       </SidebarWithHeader>
@@ -196,6 +239,8 @@ const Cita = () =>{
           </ModalFooter>
         </ModalContent>
       </Modal>
+     
+    
      
   )   
     </>
