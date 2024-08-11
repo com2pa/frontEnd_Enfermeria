@@ -1,5 +1,4 @@
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { Flex, Heading } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Calendar from 'react-calendar';
@@ -21,22 +20,19 @@ export const Calendary = () => {
           return {
             title:patient.name,
             date: patient.date[0].split('T')[0],
-            time:patient.time
-            
+            time:patient.time            
           };
         });
-        const hehe = {
-          title:'Gabriel Garcia',
-          date: '2024-08-14',
-          time: '8:30'
-          
-        };
-        setAppointments(citasPacientes.concat(hehe));
-  
+        // const hehe = {
+        //   title:'Gabriel Garcia',
+        //   date: '2024-08-14',
+        //   time: '8:30'          
+        // };
+        // setAppointments(citasPacientes.concat(hehe)); 
+        setAppointments(citasPacientes); 
       } catch (error) {
         console.log(error);
-      }
-  
+      }  
     };
     Fechas();
   }, [setAppointments]);
