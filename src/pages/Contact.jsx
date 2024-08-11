@@ -153,6 +153,7 @@ export default function ContactFormWithSocialButtons() {
   };
   const handleTimeInput=({target})=>{
     setTime(target.value);
+
   };
  
 
@@ -211,7 +212,27 @@ export default function ContactFormWithSocialButtons() {
   },[phone]);
   useEffect(()=>{
     setTimeValidation(REGEX_TIME.test(time));
-  },[time]);
+    if (time < REGEX_TIME || time >= REGEX_TIME ){
+      toast({
+        position:'top',
+        title:'horario de atención',
+        description:'De  8:00 y hasta las 5:30pm',
+        status:'info',
+        duration:4000,
+        isClosable:true        
+      });
+
+    }else{
+      toast({
+        position:'top',
+        title:'horario de atención',
+        description:'De  8:00 y hasta las 5:30pm',
+        status:'Error',
+        duration:4000,
+        isClosable:true
+      });
+    }
+  },[time, toast]);
     
   return (
     <>
