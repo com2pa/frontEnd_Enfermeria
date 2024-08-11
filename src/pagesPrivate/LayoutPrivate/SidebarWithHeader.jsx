@@ -21,6 +21,7 @@ import {
   MenuList,
   Link,
   useToast,
+  Heading,
 } from '@chakra-ui/react';
 import {
   FiHome,  
@@ -29,7 +30,7 @@ import {
   FiChevronDown,
   
 } from 'react-icons/fi';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import axios from 'axios';
 import { IoIosPersonAdd } from 'react-icons/io';
@@ -58,9 +59,17 @@ const SidebarContent = ({ onClose, ...rest }) => {
       h="full"
       {...rest}>
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          Logo
-        </Text>
+        {/* <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
+          Logo222
+        </Text> */}
+        <Heading 
+          fontSize={{  base: 'flex', md: 'none' }} 
+          color="red.600"  
+          shadow="dark-lg "p='1' 
+          rounded='sm' 
+          bg='white'
+        > NURSING AT HOME
+        </Heading>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
@@ -111,6 +120,41 @@ const MobileNav = ({ onOpen, ...rest }) => {
   const {auth} = useAuth();
   const navegate = useNavigate();
   const toast = useToast();
+
+  // notificacion de registro
+  const [notificacion,setNotificacion] = React.useState(0);
+
+  // notificacion de inicio de sesion
+  useEffect(()=>{
+    const festchPatient= async ()=>{
+      const {data}= await axios.get('/api/patient');
+      try{
+        setNotificacion(data.length);
+        // console.log('Notificaciones de pacientes', data.length);
+        toast({
+          position:'top',
+          title: 'info',
+          description: `Hay ${notificacion} nuevas citas para ti`,
+          status:'success',
+          duration: 5000,
+          isClosable: true,
+        });
+      }catch(error){
+        console.log(error);
+        toast({
+          title: 'Error',
+          description: error.response.data.error,
+          status: 'error',
+          duration: 9000,
+          isClosable: true,
+        });
+      }
+
+    };
+    festchPatient();
+  },[notificacion, setNotificacion, toast]);
+
+
   // cerrar sesion
   const handleLogout = async () => {
     try {
@@ -128,6 +172,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
       console.log(error);
     }
   };
+
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -146,17 +192,42 @@ const MobileNav = ({ onOpen, ...rest }) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
-      <Text
+      {/* logo telf */}
+      <Heading 
         display={{ base: 'flex', md: 'none' }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold">
-        Logo
-      </Text>
+        fontSize="md" 
+        color="red.600"  
+        shadow="dark-lg "p='1' 
+        rounded='sm' 
+        bg='white'
+      > NURSING AT HOME
+      </Heading>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton size="lg" variant="ghost" aria-label="open menu" icon={<FiBell />} />
+        <IconButton 
+          size="lg"  
+          variant="ghost" 
+          aria-label="open menu" 
+          icon={
+            <HStack>
+              <FiBell />
+              {
+                notificacion > 0 && (
+                  <Box
+                    as="span"
+                    bg="red.600"
+                    color="white"
+                    rounded="full"
+                    fontSize="sm"
+                    p="1"
+                  >
+                    {notificacion}
+                  </Box>
+                )
+              }
+            </HStack>
+          } 
+        />
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton py={2} transition="all 0.3s" _focus={{ boxShadow: 'none' }}>
