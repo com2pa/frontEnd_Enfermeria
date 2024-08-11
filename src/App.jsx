@@ -5,7 +5,7 @@ function App() {
     <AuthProvider>
       <Root />
     </AuthProvider>
-  )
+  );
 }
 
-export default App
+export default App;
