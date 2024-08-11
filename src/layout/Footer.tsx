@@ -66,7 +66,7 @@ export default function SmallCentered() {
         spacing={4}
         justify={{ base: 'center', md: 'space-between' }}
         align={{ base: 'center', md: 'center' }}
-        fontSize={{base:15,sm:20,md:20,lg:20,xl:30}}
+        fontSize={{base:15,sm:15,md:15,lg:17,xl:20}}
         >
           <Text>© 2024 Ingeniero Merwil Vegas. Todos los derechos reservados </Text>
         </Stack>
