@@ -155,44 +155,48 @@ export const CreateEnfermero=()=>{
   return(
     <SidebarWithHeader>
       <Card>
-        <Flex 
-          justifyContent="center" 
-          onSubmit={handleNewNurse}
-        >
-          <CardHeader >Ingrese el Enfermero</CardHeader>
-          {/* Agregar formulario */}
-
-        </Flex>
         {auth.role === 'admin' && (
-          <Box>
+          <>
+        
             <Flex 
-              flexDirection="row" 
-              m="2rem" 
-              gap={3}
-              isInvalid={!nameValidation}
+              justifyContent="center" 
+              onSubmit={handleNewNurse}
             >
-              <FormControl >
-                {/* Formulario */}
-                <Input 
-                  type="text" 
-                  placeholder="Nombre enfermero" 
-                  value={name}
-                  // onChange={(target)=>(setName(target.value))}
-                  onChange={handleNameInput}
-                  contentEditable="true"
-                />
-              </FormControl>
-              <ButtonGroup>
-                <Button 
-                  type="submit" 
-                  colorScheme='green' 
-                  onClick={handleNewNurse}
-                  isDisabled={!nameValidation}
-                >  Agregar Enfermero
-                </Button>
-              </ButtonGroup>
+              <CardHeader >Ingrese el Enfermero</CardHeader>
+              {/* Agregar formulario */}
+
             </Flex>
-          </Box>
+        
+            <Box>
+              <Flex 
+                flexDirection="row" 
+                m="2rem" 
+                gap={3}
+                isInvalid={!nameValidation}
+              >
+                <FormControl >
+                  {/* Formulario */}
+                  <Input 
+                    type="text" 
+                    placeholder="Nombre enfermero" 
+                    value={name}
+                    // onChange={(target)=>(setName(target.value))}
+                    onChange={handleNameInput}
+                    contentEditable="true"
+                  />
+                </FormControl>
+                <ButtonGroup>
+                  <Button 
+                    type="submit" 
+                    colorScheme='green' 
+                    onClick={handleNewNurse}
+                    isDisabled={!nameValidation}
+                  >  Agregar Enfermero
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+            </Box>
+          </>
         )}
       </Card>
       <Card mt={8}>

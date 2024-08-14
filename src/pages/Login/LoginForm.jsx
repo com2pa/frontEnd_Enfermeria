@@ -1,6 +1,6 @@
 import { useState, useEffect, } from 'react';
-import FormContainer from './From';
-import { Button, ButtonGroup, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
+
+import { Button, ButtonGroup, Card, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/react';
 // import { Navigate} from 'react-router';
 import axios from 'axios';
 import { useAuth } from '../../hooks/useAuth';
@@ -117,31 +117,49 @@ const LoginForm = ({ handleShow }) => {
 
   return (
     <>
-      <Menu />
-      <FormContainer h="100vh" >
-        <Heading> Login</Heading>
-        <FormControl isRequired>
-          <FormControl>
-            <Flex flexDir="column">
-              <FormLabel> Correo </FormLabel>
-              <Input onChange={handleEmailInput} type="email" value={email} placeholder="Correo" />
-            </Flex>
-          </FormControl>
-          <FormControl>
-            <Flex flexDir="column">
-              <FormLabel> Contraseña</FormLabel>
-              <Input onChange={handlePassword} type="password" value={password} placeholder="Contraseña" />
-            </Flex>
-          </FormControl>
+      <Flex flexDir="column" gap={8} p={{base:5}} maxWidth={{base:"50rem",lg:"60rem",xl:"69rem"}}   mx="auto">
+        <Menu />
+        <Card 
+          p={{base:3,lg:5}}  
+          h={{base:"60vh",md:"65vh",lg:"75vh"}} 
+          width="100%" 
+          display="flex" 
+          justifyContent={{base:"center", md:"center" ,lg:"center"}}
+          bg="gray.50"
+          borderRadius="lg"
+          boxShadow="lg"
+          border="1px solid"
+          borderColor="gray.200" 
+        >
+          <Flex justifyContent={{base:'center',md:"center",lg:"center",xl:"center"}}>
+            <Heading> Login</Heading>
+          </Flex>
+          <FormControl isRequired>
+            <FormControl >
+              <Flex flexDir="column">
+                <FormLabel fontSize={{lg:"2rem"}}> Correo </FormLabel>
+                <Input onChange={handleEmailInput} type="email" value={email} placeholder="Correo" h={{lg:"3rem"}} />
+              </Flex>
+            </FormControl>
+            <FormControl>
+              <Flex flexDir="column">
+                <FormLabel fontSize={{lg:"2rem"}}> Contraseña</FormLabel>
+                <Input onChange={handlePassword} type="password" value={password} placeholder="Contraseña" h={{lg:"3rem"}} />
+              </Flex>
+            </FormControl>
 
-        </FormControl>
-        <ButtonGroup mt='1rem'>
-          <Button onClick={handleShow} variant="ghost">Register</Button>
-          <Button onClick={handleLogin} colorScheme="green" isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
-        </ButtonGroup>
+          </FormControl>
+          <Flex justifyContent={{base:"center" ,md:"center",lg:"center",xl:"center"}}>
+            <ButtonGroup mt='1rem' >
+              <Button onClick={handleShow} variant="ghost" fontSize={{lg:"1rem",xl:"1.5rem"}}>Register</Button>
+              <Button onClick={handleLogin} colorScheme="green" fontSize={{lg:"1rem",xl:"1.5rem"}} isDisabled={!isLoginValid} isLoading={!isLoading}     >Ingresar</Button>
+            </ButtonGroup>
 
-      </FormContainer>
-      <Footer/>
+          </Flex>
+
+        </Card>
+        <Footer/>
+      </Flex>
     </>
 
   );

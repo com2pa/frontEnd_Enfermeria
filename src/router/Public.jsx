@@ -4,7 +4,6 @@ import Home from '../pages/Home';
 import About from '../pages/About';
 import Services from '../pages/Services';
 import Contact from '../pages/Contact';
-
 import Index from '../pages/Login/Index';
 import RegisterFrom from '../pages/Login/RegisterForm';
 import LoginForm from '../pages/Login/LoginForm';
@@ -26,8 +25,7 @@ export const Root = () => {
         <Route path='/register' element={<RegisterFrom />} />
         <Route path='/login' element={<LoginForm />} />
         <Route path='/verify/:id/:token' element={<Verify />} />
-        <Route path='/calendary' element={<Calendary/>}/>
-        
+        <Route path='/calendary' element={<Calendary/>}/>        
       </Routes>
 
     </>

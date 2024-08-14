@@ -123,14 +123,16 @@ const MobileNav = ({ onOpen, ...rest }) => {
 
   // notificacion de registro
   const [notificacion,setNotificacion] = React.useState(0);
-
+ 
   // notificacion de inicio de sesion
   useEffect(()=>{
     const festchPatient= async ()=>{
       const {data}= await axios.get('/api/patient');
+      console.log('pacientes en dashboard',data);      
       try{
-        setNotificacion(data.length);
-        // console.log('Notificaciones de pacientes', data.length);
+        // catidad de paciente registrado
+        setNotificacion(data.length);     
+      
         toast({
           position:'top',
           title: 'info',
@@ -140,7 +142,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
           isClosable: true,
         });
       }catch(error){
-        console.log(error);
+        // console.log(error);
         toast({
           title: 'Error',
           description: error.response.data.error,
@@ -190,7 +192,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
         onClick={onOpen}
         variant="outline"
         aria-label="open menu"
-        icon={<FiMenu />}
+        icon={
+          <FiMenu 
+            bg="yellow.100"
+           
+          />}
       />
       {/* logo telf */}
       <Heading 
@@ -258,7 +264,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               // bg={useColorModeValue('white', 'gray.900')}
               // borderColor={useColorModeValue('gray.200', 'gray.700')}
             >
-              <MenuItem>Profile</MenuItem>
+              {/* <MenuItem>Profile</MenuItem> */}
               {/* <MenuItem>Settings</MenuItem>
               <MenuItem>Billing</MenuItem> */}
               <MenuDivider />

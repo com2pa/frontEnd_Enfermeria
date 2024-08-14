@@ -147,37 +147,41 @@ export const CreateServicio = () => {
   return (
     <SidebarWithHeader>
       <Card>
-        <Flex 
-          justifyContent="center" 
-          onSubmit={handleNewCategoria}
-        >
-          <CardHeader >Ingrese el Servicio</CardHeader>
-          {/* Agregar formulario */}
-
-        </Flex>
         {auth.role === 'admin' && (
-          <Box>
-            <Flex flexDirection="row" m="2rem" gap={3}>
-              <FormControl isInvalid={!nameValidation}>
-                {/* Formulario */}
-                <Input 
-                  type="text" 
-                  placeholder="Nombre del Servicio" 
-                  value={NameService}
-                  onChange={handleNameInput}
-                />
-              </FormControl>
-              <ButtonGroup>
-                <Button 
-                  type="submit" 
-                  colorScheme='green' 
-                  onClick={handleNewCategoria}
-                  isDisabled={!nameValidation}
-                >  Agregar Servicio
-                </Button>
-              </ButtonGroup>
+          <>
+        
+            <Flex 
+              justifyContent="center" 
+              onSubmit={handleNewCategoria}
+            >
+              <CardHeader >Ingrese el Servicio</CardHeader>
+              {/* Agregar formulario */}
+
             </Flex>
-          </Box>
+        
+            <Box>
+              <Flex flexDirection="row" m="2rem" gap={3}>
+                <FormControl isInvalid={!nameValidation}>
+                  {/* Formulario */}
+                  <Input 
+                    type="text" 
+                    placeholder="Nombre del Servicio" 
+                    value={NameService}
+                    onChange={handleNameInput}
+                  />
+                </FormControl>
+                <ButtonGroup>
+                  <Button 
+                    type="submit" 
+                    colorScheme='green' 
+                    onClick={handleNewCategoria}
+                    isDisabled={!nameValidation}
+                  >  Agregar Servicio
+                  </Button>
+                </ButtonGroup>
+              </Flex>
+            </Box>
+          </>
         )}
       </Card>
       {/* Listado de categorias */}

@@ -126,107 +126,107 @@ export const ListEnfermero =({nurse,  handleEditNurse, handleDeleteNurse })=>{
           />
           <Flex flexDir="row" gap="0.5rem" justifyContent="flex-end" >
             {auth.role === 'admin' && (
-              <ButtonGroup>
-                      
-                <IconButton 
-                  onClick={handleEdit} 
-                  color="white" 
-                  bg="yellow.300" 
-                  icon={<ImPencil2 /> }
-                />
-                <IconButton 
-                  onClick={() => handleDeleteNurse(nurse._id)} 
-                  color="white" bg="red.600" 
-                  icon={<DeleteIcon/> }
-                />                      
-              </ButtonGroup>            
-            )}
-            <Popover
-              isOpen={isEditing}
-              onOpen={SetIsEditing.on}
-              onClose={SetIsEditing.off}
-              closeOnBlur={false}
-              isLazy
-              lazyBehavior="keepMounted"
-            >
-              {/* <PopoverAnchor >           */}
-              {/* <Text>Servicio !</Text> */}          
-              {/* <IconButton size="sm" icon={<FcBusinessman />} /> */}
-              {/* </PopoverAnchor> */}
-              <HStack>
-                <PopoverTrigger>
-                  <Button
-                    h="30px"
-                    colorScheme="green"
-                    color="white"
-                    p={5}
-                  >
-                    {isEditing ? 'Guardar' : 'Servicio'}
-                  </Button>
-                </PopoverTrigger>
-              </HStack>
-              <PopoverContent>
-                <PopoverBody>
-                  <Flex justifyContent="center">
-                    <Text as='b'> Seleccione el servicio del Enfermero </Text>
-                  </Flex>
-                  <Divider  borderColor="red" pt={2}/>
-                  {/* <RadioGroup 
-                    value={selectedService} 
-                    onChange={handleServiceChange}
-                    name="service"
-                    gap={5}
-                    mt={5}
-                    mb={5}
-                  >
-                    {services.map((service) => (
-                      <Radio 
-                        key={service.id} 
-                        value={service.id}
-                        color="red"
-                        size="md"
-                        isChecked={selectedService === service.id} 
-                        label={service.name}
-                        gap={5}
-                        borderColor="red" 
+              <>              
+                <ButtonGroup>                      
+                  <IconButton 
+                    onClick={handleEdit} 
+                    color="white" 
+                    bg="yellow.300" 
+                    icon={<ImPencil2 /> }
+                  />
+                  <IconButton 
+                    onClick={() => handleDeleteNurse(nurse._id)} 
+                    color="white" bg="red.600" 
+                    icon={<DeleteIcon/> }
+                  />                      
+                </ButtonGroup>  
+                <Popover
+                  isOpen={isEditing}
+                  onOpen={SetIsEditing.on}
+                  onClose={SetIsEditing.off}
+                  closeOnBlur={false}
+                  isLazy
+                  lazyBehavior="keepMounted"
+                >
+                  {/* <PopoverAnchor >           */}
+                  {/* <Text>Servicio !</Text> */}          
+                  {/* <IconButton size="sm" icon={<FcBusinessman />} /> */}
+                  {/* </PopoverAnchor> */}
+                  <HStack>
+                    <PopoverTrigger>
+                      <Button
+                        h="30px"
+                        colorScheme="green"
+                        color="white"
+                        p={5}
                       >
-                  
-                        {service.NameService}
-                      </Radio>
-                    ))}
-                  </RadioGroup> */}
-                  <Select
-                    value={selectedService}
-                    onChange={handleServiceChange}                    
-                    placeholder="Seleccione opcion para el enfermero"
-                    color="black"
-                    fontSize="14px"
-                    fontWeight="semibold"
-                    border="1px solid black"
-                    borderColor="green.600"
-                    borderRadius="5px"
-                    mt={5}
-                  >
-                    {services.map((service) => (
-                      <option key={service.id} value={service.id}>
-                        {service.NameService}
-                      </option>
-                    ))}
-                  </Select>
-                  <Flex justifyContent="center"> 
-
-                    <Button 
-                      onClick={()=>handleSave(nurse._id)} 
-                      bg="green.300"
-                      color="white"
+                        {isEditing ? 'Guardar' : 'Servicio'}
+                      </Button>
+                    </PopoverTrigger>
+                  </HStack>
+                  <PopoverContent>
+                    <PopoverBody>
+                      <Flex justifyContent="center">
+                        <Text as='b'> Seleccione el servicio del Enfermero </Text>
+                      </Flex>
+                      <Divider  borderColor="red" pt={2}/>
+                      {/* <RadioGroup 
+                      value={selectedService} 
+                      onChange={handleServiceChange}
+                      name="service"
+                      gap={5}
                       mt={5}
-                      
-                    >Guardar</Button>
-                  </Flex>
-                </PopoverBody>
-              </PopoverContent>
-            </Popover>
+                      mb={5}
+                    >
+                      {services.map((service) => (
+                        <Radio 
+                          key={service.id} 
+                          value={service.id}
+                          color="red"
+                          size="md"
+                          isChecked={selectedService === service.id} 
+                          label={service.name}
+                          gap={5}
+                          borderColor="red" 
+                        >
+                    
+                          {service.NameService}
+                        </Radio>
+                      ))}
+                    </RadioGroup> */}
+                      <Select
+                        value={selectedService}
+                        onChange={handleServiceChange}                    
+                        placeholder="Seleccione opcion para el enfermero"
+                        color="black"
+                        fontSize="14px"
+                        fontWeight="semibold"
+                        border="1px solid black"
+                        borderColor="green.600"
+                        borderRadius="5px"
+                        mt={5}
+                      >
+                        {services.map((service) => (
+                          <option key={service.id} value={service.id}>
+                            {service.NameService}
+                          </option>
+                        ))}
+                      </Select>
+                      <Flex justifyContent="center"> 
 
+                        <Button 
+                          onClick={()=>handleSave(nurse._id)} 
+                          bg="green.300"
+                          color="white"
+                          mt={5}
+                        
+                        >Guardar</Button>
+                      </Flex>
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
+              </>
+            )}
           </Flex>
         </Flex>
       </Card>   
