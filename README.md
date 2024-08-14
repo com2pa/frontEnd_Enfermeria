@@ -1,5 +1,15 @@
-El presente proyecto tiene como primer objetivo el desarrollo del frontEnd en la React 
-donde se utilizara las siguientes :
+Proyecto NURSING at Home (enfermeria en casa) frontEnd, la cual es desarrollado en react
+consiste en:
+ 1.- Registro e incio de sesion
+ 2.- ingreso de servicio a ofrecer al paciente
+ 2.1- crear,editar,eliminar servicio a ofrecer
+ 3.- ingreso de enfermero
+ 3.1- crear, editar , eliminar enfermero
+ 4.- ver citas de paciente
+ 4.- status de espera , finalizada , detalle de cliente, eliminar citas
+ todo con sus repectivas validaciones  y roles 
+
+--pasos para su instalación 
 # React + Vite
 
 1-. React +Vite 
@@ -23,14 +33,22 @@ npm run dev
 
 2. instalar la siguiente dependencias
 
-a.- npm install React-router@6 React-router-dom@6
-b.- npm install axios
-c.- npm install react-icons
-d.- npm i @chakra-ui/react @emotion/react @emotion/styled framer-motion
-
 una vez realizado los pasos mencionar y ejecutado el proyecto obtendras el siguiente resultado
-![alt text](image-3.png)
+
+
+![alt text](image-4.png)!
 
 
 
-##### en desarrollo
+vista
+![alt text](image-5.png)
+
+![alt text](image-6.png)
+
+![alt text](image-7.png)
+
+![alt text](image-8.png)
+
+
+
+
